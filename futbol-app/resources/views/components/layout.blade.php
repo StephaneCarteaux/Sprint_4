@@ -18,11 +18,14 @@
             </div>
             <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
               <div class="text-sm lg:flex-grow">
-                <a href="partidos" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('partidos') ? 'text-white' : '' }}">
+                <a href="/games" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('games') ? 'text-white' : '' }}">
                   Partidos
                 </a>
-                <a href="clasificacion" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('clasificacion') ? 'text-white' : '' }}">
+                <a href="/ranking" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('ranking') ? 'text-white' : '' }}">
                   Clasificación
+                </a>
+                <a href="/teams" class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('teams') ? 'text-white' : '' }}">
+                  Equipos
                 </a>
               </div>
               <div>
@@ -32,8 +35,9 @@
           </nav>
 
         <hr/>
+        <div class="container mx-auto px-4 max-w-screen-lg">
         {{ $slot }}
-
+        </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
