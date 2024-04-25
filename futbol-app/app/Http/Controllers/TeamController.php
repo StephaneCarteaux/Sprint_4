@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Team;
 
 
@@ -33,11 +34,15 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'logo' => 'required',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required'
         ]);
 
-        Team::create($request->all());
+        Team::create([
+            'logo' => $request->file('logo')->store(options: 'logos'),
+            'name' => $request->name
+        ]);
+
 
         return redirect()->route('teams.index');
     }
@@ -71,6 +76,8 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
+        Storage::disk('logos')->delete(Team::find($id)->logo);
+
         Team::destroy($id);
         return redirect()->route('teams.index');
     }

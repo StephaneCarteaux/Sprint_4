@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('league_id')->constrained(
+                table: 'leagues',
+                indexName: 'fk_league_id'
+            );
             $table->foreignId('team1_id')->constrained(
                 table: 'teams',
                 indexName: 'fk_team1_id'
