@@ -4,14 +4,14 @@
     </x-slot>
 
     <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
-        <span class="flex-grow block border-t border-purple-700"></span>
+        <span class="flex-grow block border-t border-gray-700"></span>
         <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-900 text-white">
             Ligas
         </span>
-        <span class="flex-grow block border-t border-purple-700"></span>
+        <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-purple-700 mt-16">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-400">
             <thead class="text-xs text-gray-200 uppercase bg-gray-700">
@@ -70,7 +70,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="bg-red-700 hover:bg-red-900 text-white py-2 px-4 rounded">Delete</button>
+                                    class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -85,11 +85,9 @@
         <form action="{{ route('leagues.create') }}" method="get">
             @csrf
             <button type="submit"
-                class="mt-4 p-0.5 mb-2 me-2 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border border-gray-500 rounded">Crear
+                class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 border rounded">Crear
                 liga</button>
         </form>
-
-
     </div>
 
 
