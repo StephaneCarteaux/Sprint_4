@@ -17,4 +17,5 @@ Route::resource('teams', TeamController::class);
 Route::resource('games', GameController::class);
 Route::resource('leagues', LeagueController::class);
 Route::resource('ranking', RankingController::class);
-
+Route::patch('leagues/{league}/activate', [LeagueController::class, 'activate'])->name('leagues.activate');
+Route::patch('leagues/{league}/start', [LeagueController::class, 'start'])->name('leagues.start');

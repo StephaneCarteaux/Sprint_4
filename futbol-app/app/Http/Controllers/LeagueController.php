@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\League;
 
 class LeagueController extends Controller
 {
@@ -11,7 +12,9 @@ class LeagueController extends Controller
      */
     public function index()
     {
-        //
+        $leagues = League::all();
+
+        return view('leagues.index', ['leagues' => $leagues]);
     }
 
     /**
@@ -19,7 +22,7 @@ class LeagueController extends Controller
      */
     public function create()
     {
-        //
+        return view('leagues.create');
     }
 
     /**
@@ -27,7 +30,19 @@ class LeagueController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            //'started' => 'required',
+            'active' => 'required'
+        ]);
+
+        League::create([
+            'name' => $request->name,
+            'started' => '0',
+            'active' => $request->active
+        ]);
+
+        return redirect()->route('leagues.index');
     }
 
     /**
@@ -51,7 +66,19 @@ class LeagueController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'started' => 'required',
+            'active' => 'required'
+        ]);
+
+        $league = League::findOrFail($id);
+        $league->name = $request->name;
+        $league->started = $request->started;
+        $league->active = $request->active;
+        $league->save();
+
+        return redirect()->route('leagues.index');
     }
 
     /**
@@ -59,6 +86,39 @@ class LeagueController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        League::destroy($id);
+        return redirect()->route('leagues.index');
+    }
+
+    /**
+     * Update the active field in storage.
+     */
+    public function activate(Request $request, string $id)
+    {
+        $request->validate([
+            'active' => 'required'
+        ]);
+
+        $league = League::findOrFail($id);
+        $league->active = $request->active;
+        $league->save();
+
+        return redirect()->route('leagues.index');
+    }
+
+    /**
+     * Update the starteds field in storage.
+     */
+    public function start(Request $request, string $id)
+    {
+        $request->validate([
+            'started' => 'required'
+        ]);
+
+        $league = League::findOrFail($id);
+        $league->started = $request->started;
+        $league->save();
+
+        return redirect()->route('leagues.index');
     }
 }

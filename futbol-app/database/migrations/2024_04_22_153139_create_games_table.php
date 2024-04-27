@@ -13,18 +13,22 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('league_id')->constrained(
-                table: 'leagues',
-                indexName: 'fk_league_id'
-            );
-            $table->foreignId('team1_id')->constrained(
-                table: 'teams',
-                indexName: 'fk_team1_id'
-            );
-            $table->foreignId('team2_id')->constrained(
-                table: 'teams',
-                indexName: 'fk_team2_id'
-            );
+            $table->foreignId('league_id')
+                ->constrained(
+                    table: 'leagues',
+                    indexName: 'fk_league_games_id'
+                )
+                ->onDelete('cascade');
+            $table->foreignId('team1_id')
+                ->constrained(
+                    table: 'teams',
+                    indexName: 'fk_team1_id'
+                );
+            $table->foreignId('team2_id')
+                ->constrained(
+                    table: 'teams',
+                    indexName: 'fk_team2_id'
+                );
             $table->unsignedInteger('game_number');
             $table->dateTime('date');
             $table->unsignedInteger('score1');
@@ -38,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game');
+        Schema::dropIfExists('games');
     }
 };

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('league_id')->constrained(
-                table: 'leagues',
-                indexName: 'fk_league_id'
-            );
+            $table->foreignId('league_id')
+                ->constrained(
+                    table: 'leagues',
+                    indexName: 'fk_league_teams_id'
+                )
+                ->onDelete('cascade');
             $table->string('name');
             $table->char('logo', 255);
             $table->timestamps();
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('team');
+        Schema::dropIfExists('teams');
     }
 };
