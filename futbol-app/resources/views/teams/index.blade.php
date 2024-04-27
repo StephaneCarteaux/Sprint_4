@@ -35,7 +35,7 @@
                             <form action="{{ route('teams.edit', $team->id) }}" method="get">
                                 @csrf
                                 <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-3 rounded cursor-pointer">Edit</button>
+                                class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">Edit</button>
                             </form>
 
                         </td>
@@ -45,7 +45,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white py-2 px-3 rounded cursor-pointer">Delete</button>
+                                class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">Delete</button>
                             </form>
                         </td>
                     </tr>

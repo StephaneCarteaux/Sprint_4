@@ -85,7 +85,7 @@
         <form action="{{ route('leagues.create') }}" method="get">
             @csrf
             <button type="submit"
-                class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 border rounded">Crear
+                class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 rounded">Crear
                 liga</button>
         </form>
     </div>
