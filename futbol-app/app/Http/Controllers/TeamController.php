@@ -34,11 +34,13 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'league_id' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required'
         ]);
 
         Team::create([
+            'league_id' => $request->league_id,
             'logo' => $request->file('logo')->store(options: 'logos'),
             'name' => $request->name
         ]);

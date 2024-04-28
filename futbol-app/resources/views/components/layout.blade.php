@@ -31,22 +31,22 @@
             <div class="text-sm lg:flex-grow">
                 <!-- Games -->
                 <a href="{{ route('games.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('games') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('games*') ? 'text-white' : '' }}">
                     Partidos
                 </a>
                 <!-- Ranking -->
                 <a href="{{ route('ranking.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('ranking') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('ranking*') ? 'text-white' : '' }}">
                     Clasificación
                 </a>
                 <!-- Teams -->
                 <a href="{{ route('teams.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('teams') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('teams*') ? 'text-white' : '' }}">
                     Equipos
                 </a>
                 <!-- Leagues -->
                 <a href="{{ route('leagues.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('leagues') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('leagues*') ? 'text-white' : '' }}">
                     Gestionar ligas
                 </a>
 
