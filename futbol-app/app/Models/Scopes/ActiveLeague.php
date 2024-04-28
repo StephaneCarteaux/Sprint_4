@@ -15,6 +15,8 @@ class ActiveLeague implements Scope
     public function apply(Builder $builder, Model $model): void
     {
         $activeLeague = League::where('active', '=', true)->first();
-        $builder->where('league_id', '=', $activeLeague->id);
+        if($activeLeague){
+            $builder->where('league_id', '=', $activeLeague->id);
+        }
     }
 }
