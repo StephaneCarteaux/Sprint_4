@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Events\LeagueSaved;
-use App\Events\LeagueDeleted;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+//use App\Events\LeagueSaved;
+//use App\Events\LeagueDeleted;
+//use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class League extends Model
 {
@@ -16,6 +17,22 @@ class League extends Model
         'active',
         'started'
     ];
+
+    /**
+     * Get the Teams of the league.
+     */
+    public function teams(): HasMany
+    {
+        return $this->hasMany(Team::class);
+    }
+
+    /**
+     * Get the games of the league.
+     */
+    public function games(): HasMany
+    {
+        return $this->hasMany(Game::class);
+    }
 
     // The booted method is listening to the saving event
     // and sets the active field to 0 if the league is not active

@@ -62,7 +62,7 @@ class TeamController extends Controller
      */
     public function edit(string $id)
     {
-        echo "Edit";
+        return view('teams.edit', ['team' => Team::findOrFail($id)]);
     }
 
     /**
@@ -70,7 +70,23 @@ class TeamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $team = Team::findOrFail($id);
+        $team->name = $request->name;
+
+        if($request->hasFile('logo')) {
+            if ($team->logo) {
+                Storage::disk('logos')->delete($team->logo);
+            }
+            $team->logo = $request->file('logo')->store(options: 'logos');
+        }
+        
+        $team->save();
+
+        return redirect()->route('teams.index');
     }
 
     /**
@@ -78,9 +94,13 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
-        Storage::disk('logos')->delete(Team::find($id)->logo);
-
-        Team::destroy($id);
-        return redirect()->route('teams.index');
+        try {
+            $logo = Team::find($id)->logo;
+            Team::destroy($id);
+            Storage::disk('logos')->delete($logo);
+            return redirect()->route('teams.index');
+        } catch (\Exception $e) {
+            return redirect()->route('teams.index')->with('error', $e->getMessage());
+        }
     }
 }

@@ -11,8 +11,22 @@
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
+    <!-- Error message-->
+    @if (session('error'))
+        <script>
+            window.onload = function() {
+                window.setTimeout(function() {
+                    // Check if the error message exists
+                    @if (session('error'))
+                        // Show the alert
+                        alert("{{ session('error') }}");
+                    @endif
+                }, 500); // Wait for 500 milliseconds
+            }
+        </script>
+    @endif
 
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-400">
             <thead class="text-xs text-gray-200 uppercase bg-gray-700">
@@ -27,29 +41,29 @@
             <tbody>
                 @foreach ($teams as $team)
                     <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
-                        <td class="px-6 py-4"><img src="logos/{{ $team->logo }}"/></td>
+                        <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" /></td>
                         <td class="px-6 py-4">{{ $team->name }}</td>
 
                         <!-- Edit button-->
                         <td class="px-6 py-4">
                             <form action="{{ route('teams.edit', $team->id) }}" method="get">
                                 @csrf
-                                <button type="submit"
-                                class="text-white/50 hover:text-white py-2 px-4">
-                                <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
-                            </button>
+                                <button type="submit" class="text-white/50 hover:text-white py-2 px-4">
+                                    <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
+                                </button>
                             </form>
 
                         </td>
-                         <!-- Delete button-->
+                        <!-- Delete button-->
                         <td class="px-6 py-4">
                             <form action="{{ route('teams.destroy', $team->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('¿Eliminar {{ $team->name }}?')"
-                                class="text-white/50 hover:text-white py-2 px-4">
-                                <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
-                            </button>
+                                <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
+                                    onclick="return confirm('¿Eliminar {{ $team->name }}?')"
+                                    class="py-2 px-4 {{ $team->league->started ? 'text-white/20 hover:text-white/20 cursor-not-allowed' : 'text-white/50 hover:text-white' }}">
+                                    <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
