@@ -19,8 +19,8 @@
                 <tr>
                     <th class="px-6 py-3">Logo</th>
                     <th class="px-6 py-3">Nombre</th>
-                    <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
+                    <th class="px-6 py-3">Editar</th>
+                    <th class="px-6 py-3">Eliminar</th>
 
                 </tr>
             </thead>
@@ -35,7 +35,9 @@
                             <form action="{{ route('teams.edit', $team->id) }}" method="get">
                                 @csrf
                                 <button type="submit"
-                                class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">Edit</button>
+                                class="text-white/50 hover:text-white py-2 px-4">
+                                <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
+                            </button>
                             </form>
 
                         </td>
@@ -44,8 +46,10 @@
                             <form action="{{ route('teams.destroy', $team->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"
-                                class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">Delete</button>
+                                <button type="submit" onclick="return confirm('¿Eliminar {{ $team->name }}?')"
+                                class="text-white/50 hover:text-white py-2 px-4">
+                                <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
+                            </button>
                             </form>
                         </td>
                     </tr>

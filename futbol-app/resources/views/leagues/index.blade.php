@@ -17,12 +17,10 @@
             <thead class="text-xs text-gray-200 uppercase bg-gray-700">
                 <tr>
                     <th class="px-6 py-3">Nombre</th>
-                    <th class="px-6 py-3">Empezada</th>
-                    <th class="px-6 py-3">Activa</th>
-                    <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
+                    <th class="px-6 py-3">Iniciar</th>
+                    <th class="px-6 py-3">Activar</th>
+                    <th class="px-6 py-3">Editar</th>
+                    <th class="px-6 py-3">Eliminar</th>
 
                 </tr>
             </thead>
@@ -30,8 +28,6 @@
                 @foreach ($leagues as $league)
                     <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
                         <td class="px-6 py-4">{{ $league->name }}</td>
-                        <td class="px-6 py-4">{{ $league->started }}</td>
-                        <td class="px-6 py-4">{{ $league->active }}</td>
 
                         <!-- Start button-->
                         <td class="px-6 py-4">
@@ -75,7 +71,7 @@
                             <form action="{{ route('leagues.destroy', $league->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit"
+                                <button type="submit" onclick="return confirm('¿Eliminar {{ $league->name }} sus equipos y partidos?\nEsta acción no se puede deshacer.')"
                                 class="text-white/50 hover:text-white py-2 px-4">
                                     <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
                                 </button>
