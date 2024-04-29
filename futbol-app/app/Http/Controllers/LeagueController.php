@@ -67,7 +67,7 @@ class LeagueController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'sometimes:required'
+            'name' => 'required'
         ]);
 
         $league = League::findOrFail($id);
