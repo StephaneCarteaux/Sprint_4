@@ -32,13 +32,13 @@ class LeagueController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            //'started' => 'required',
+            'started' => 'required',
             'active' => 'required'
         ]);
 
         League::create([
             'name' => $request->name,
-            'started' => '0',
+            'started' => $request->started,
             'active' => $request->active
         ]);
 
@@ -58,7 +58,7 @@ class LeagueController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('leagues.edit', ['league' => League::findOrFail($id)]);
     }
 
     /**
@@ -67,15 +67,11 @@ class LeagueController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required',
-            'started' => 'required',
-            'active' => 'required'
+            'name' => 'sometimes:required'
         ]);
 
         $league = League::findOrFail($id);
         $league->name = $request->name;
-        $league->started = $request->started;
-        $league->active = $request->active;
         $league->save();
 
         return redirect()->route('leagues.index');

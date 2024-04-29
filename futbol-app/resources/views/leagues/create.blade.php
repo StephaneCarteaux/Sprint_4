@@ -17,6 +17,7 @@
             <form action="{{ route('leagues.store') }}" method="post" class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
                 <input type="hidden" id="active" name="active" value="1">
+                <input type="hidden" id="started" name="started" value="0">
 
                 <!-- Name -->
                 <div class="mb-5">
