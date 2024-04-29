@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 @foreach ($leagues as $league)
-                    <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700 hover:bg-gray-600">
+                    <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
                         <td class="px-6 py-4">{{ $league->name }}</td>
                         <td class="px-6 py-4">{{ $league->started }}</td>
                         <td class="px-6 py-4">{{ $league->active }}</td>
@@ -40,7 +40,9 @@
                                 @method('PATCH')
                                 <input type="hidden" id="started" name="started" value="1">
                                 <button type="submit" {{ $league->started ? 'disabled' : '' }}
-                                    class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded {{ $league->started ? 'bg-gray-500 hover:bg-gray-500 text-white/50 cursor-not-allowed' : '' }}">Empezar</button>
+                                    class="py-2 px-4 {{ $league->started ? 'text-white/20 hover:text-white/20 cursor-not-allowed' : 'text-white/50 hover:text-white' }}">
+                                    <i class="fa-solid fa-play fa-xl" title="Iniciar"></i>
+                                </button>
                             </form>
 
                         </td>
@@ -51,7 +53,9 @@
                                 @method('PATCH')
                                 <input type="hidden" id="active" name="active" value="1">
                                 <button type="submit" {{ $league->active ? 'disabled' : '' }}
-                                    class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded {{ $league->active ? 'bg-gray-500 hover:bg-gray-500 text-white/50 cursor-not-allowed' : '' }}">Activar</button>
+                                    class="py-2 px-4 {{ $league->active ? 'text-white/20 hover:text-white/20 cursor-not-allowed' : 'text-white/50 hover:text-white' }}">
+                                    <i class="fa-solid fa-eye fa-xl" title="Activar"></i>
+                                </button>
                             </form>
 
                         </td>
@@ -60,7 +64,9 @@
                             <form action="{{ route('leagues.edit', $league->id) }}" method="get">
                                 @csrf
                                 <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">Edit</button>
+                                    class="text-white/50 hover:text-white py-2 px-4">
+                                    <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
+                                </button>
                             </form>
 
                         </td>
@@ -70,7 +76,9 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">Delete</button>
+                                class="text-white/50 hover:text-white py-2 px-4">
+                                    <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

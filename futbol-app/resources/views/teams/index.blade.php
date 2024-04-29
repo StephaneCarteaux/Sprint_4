@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 @foreach ($teams as $team)
-                    <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700 hover:bg-gray-600">
+                    <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
                         <td class="px-6 py-4"><img src="logos/{{ $team->logo }}"/></td>
                         <td class="px-6 py-4">{{ $team->name }}</td>
 
