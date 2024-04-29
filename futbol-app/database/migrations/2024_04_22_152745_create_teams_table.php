@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->char('logo', 255);
             $table->timestamps();
+            // Restriction UNIQUE for league_id/name
+            $table->unique(['league_id', 'name']);
         });
     }
 
