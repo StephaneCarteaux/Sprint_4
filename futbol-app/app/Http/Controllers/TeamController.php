@@ -92,15 +92,11 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+   public function destroy(string $id)
     {
-        try {
             $logo = Team::find($id)->logo;
             Team::destroy($id);
             Storage::disk('logos')->delete($logo);
             return redirect()->route('teams.index');
-        } catch (\Exception $e) {
-            return redirect()->route('teams.index')->with('error', $e->getMessage());
-        }
     }
 }

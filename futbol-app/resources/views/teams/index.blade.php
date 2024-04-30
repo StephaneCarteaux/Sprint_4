@@ -12,19 +12,7 @@
     </h2>
 
     <!-- Error message-->
-    @if (session('error'))
-        <script>
-            window.onload = function() {
-                window.setTimeout(function() {
-                    // Check if the error message exists
-                    @if (session('error'))
-                        // Show the alert
-                        alert("{{ session('error') }}");
-                    @endif
-                }, 500); // Wait for 500 milliseconds
-            }
-        </script>
-    @endif
+    <x-exceptions/>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
 
@@ -59,7 +47,7 @@
                             <form action="{{ route('teams.destroy', $team->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
+                                <button type="submit" {{ $team->league->started ? '' : '' }}
                                     onclick="return confirm('¿Eliminar {{ $team->name }}?')"
                                     class="py-2 px-4 {{ $team->league->started ? 'text-white/20 hover:text-white/20 cursor-not-allowed' : 'text-white/50 hover:text-white' }}">
                                     <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
