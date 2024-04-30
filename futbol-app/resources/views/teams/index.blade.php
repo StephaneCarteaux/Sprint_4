@@ -47,7 +47,7 @@
                             <form action="{{ route('teams.destroy', $team->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" {{ $team->league->started ? '' : '' }}
+                                <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
                                     onclick="return confirm('¿Eliminar {{ $team->name }}?')"
                                     class="py-2 px-4 {{ $team->league->started ? 'text-white/20 hover:text-white/20 cursor-not-allowed' : 'text-white/50 hover:text-white' }}">
                                     <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
