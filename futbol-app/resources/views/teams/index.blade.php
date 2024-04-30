@@ -11,9 +11,6 @@
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
 
-    <!-- Error message-->
-    <x-exceptions/>
-
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
 
         <table class="w-full text-sm text-left rtl:text-right text-gray-400">
@@ -47,7 +44,7 @@
                             <form action="{{ route('teams.destroy', $team->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
+                                <button type="submit" {{ $team->league->started ? '' : '' }}
                                     onclick="return confirm('¿Eliminar {{ $team->name }}?')"
                                     class="py-2 px-4 {{ $team->league->started ? 'text-white/20 hover:text-white/20 cursor-not-allowed' : 'text-white/50 hover:text-white' }}">
                                     <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
