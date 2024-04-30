@@ -12,15 +12,17 @@
             <span class="flex-grow block border-t border-gray-700"></span>
         </h2>
 
-        <div
-            class="relative overflow-x-auto shadow-md sm:rounded-lg  bg-gray-700 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
+        <!-- Errors template -->
+        <x-errors/>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg  bg-gray-700 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
             <form action="{{ route('leagues.update', $league->id) }} " method="post" class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
                 @method('PATCH')
 
                 <!-- Name -->
                 <div class="mb-5">
-                    <label for="name" class="block mb-1 text-sm font-medium text-white">Name:</label>
+                    <label for="name" class="block mb-1 text-sm font-medium text-white">Nombre:</label>
                     <input type="text" id="name" name="name"
                         class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white" value="{{ $league->name }}">
                 </div>

@@ -11,9 +11,11 @@
             </span>
             <span class="flex-grow block border-t border-gray-700"></span>
         </h2>
-        <div
-        
-            class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-purple-700 bg-gray-700 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
+
+        <!-- Errors template -->
+        <x-errors/>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-purple-700 bg-gray-700 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
             <form action="{{ route('teams.store') }}" method="post" enctype="multipart/form-data"
                 class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
