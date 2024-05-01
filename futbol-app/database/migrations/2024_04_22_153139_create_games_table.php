@@ -31,8 +31,8 @@ return new class extends Migration
                 );
             $table->unsignedInteger('game_number');
             $table->dateTime('date');
-            $table->unsignedInteger('score1');
-            $table->unsignedInteger('score2');
+            $table->unsignedInteger('team1_goals');
+            $table->unsignedInteger('team2_goals');
             $table->timestamps();
         });
     }

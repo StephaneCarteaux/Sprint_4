@@ -45,7 +45,6 @@ class TeamController extends Controller
             'logo' => $request->file('logo')->store(options: 'logos')
         ]);
 
-
         return redirect()->route('teams.index');
     }
 

@@ -39,7 +39,27 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([    
+            'league_id' => 'required',
+            'game_number' => 'required|integer',
+            'date' => 'required|date',
+            'team1_id' => 'required',
+            'team2_id' => 'required',
+            'team1_goals' => 'required|integer',
+            'team2_goals' => 'required|integer'
+        ]);
+
+        Game::create([
+            'league_id' => $request->league_id,
+            'game_number' => $request->game_number,
+            'date' => $request->date,
+            'team1_id' => $request->team1_id,
+            'team2_id' => $request->team2_id,
+            'team1_goals' => $request->team1_goals,
+            'team2_goals' => $request->team2_goals
+        ]);
+
+        return redirect()->route('games.index');
     }
 
     /**
