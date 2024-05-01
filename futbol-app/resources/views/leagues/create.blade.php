@@ -24,13 +24,13 @@
                 <input type="hidden" id="started" name="started" value="0">
 
                 <!-- Name -->
-                <div class="mb-5">
+                <div class="mb-5 px-3">
                     <label for="name" class="block mb-1 text-sm font-medium text-white">Nombre:</label>
                     <input type="text" id="name" name="name"
                         class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>">
                 </div>
 
-                <div class="flex justify-between mt-5">
+                <div class="flex justify-between mt-5 px-3">
                     <!-- Return button -->
                     <a href="{{ route('leagues.index') }}"
                         class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 rounded">Volver</a>

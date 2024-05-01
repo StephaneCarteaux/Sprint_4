@@ -21,19 +21,19 @@
                 @csrf
                 <input type="hidden" id="league_id" name="league_id" value="{{ $activeLeague->id }}">
                 <!-- Name -->
-                <div class="mb-5">
+                <div class="mb-5 px-3">
                     <label for="name" class="block mb-1 text-sm font-medium text-white">Name:</label>
                     <input type="text" id="name" name="name"
                         class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white">
                 </div>
                 <!-- Logo -->
-                <div class="mb-5">
+                <div class="mb-5 px-3">
                     <label for="logo" class="block mb-1 text-sm font-medium text-white">Logo:</label>
                     <input type="file" id="logo" name="logo"
                         class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white">
                 </div>
 
-                <div class="flex justify-between mt-5">
+                <div class="flex justify-between mt-5 px-3">
                     <!-- Return button -->
                     <a href="{{ route('teams.index') }}"
                     class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 rounded">Volver</a>

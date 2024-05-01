@@ -12,35 +12,35 @@
             <span class="flex-grow block border-t border-gray-700"></span>
         </h2>
 
-         <!-- Errors template -->
-         <x-errors/>
+        <!-- Errors template -->
+        <x-errors/>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg  bg-gray-700 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
-            <form action="{{ route('teams.update', $team->id) }} " method="post" enctype="multipart/form-data"
-                class="max-w-sm mx-auto mt-8 mb-8">
+            <form action="{{ route('teams.update', $team->id) }} " method="post" enctype="multipart/form-data" class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
                 @method('PATCH')
 
                 <!-- Name -->
-                <div class="mb-5">
+                <div class="mb-5 px-3">
                     <label for="name" class="block mb-1 text-sm font-medium text-white">Name:</label>
                     <input type="text" id="name" name="name"
                         class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white" value="{{ $team->name }}">
                 </div>
+
                 <!--  Actual logo -->
-                <div class="mb-5">
+                <div class="mb-5 px-3">
                     <label class="block mb-1 text-sm font-medium text-white">Logo actual:</label>
-                    <img src="{{ asset('logos/' . $team->logo) }}" />
+                    <img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}" width="48" height="48">
                 </div>
 
                 <!-- New logo -->
-                <div class="mb-5">
+                <div class="mb-5 px-3">
                     <label for="logo" class="block mb-1 text-sm font-medium text-white">Nuevo logo:</label>
                     <input type="file" id="logo" name="logo"
                         class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white">
                 </div>
 
-                <div class="flex justify-between mt-5">
+                <div class="flex justify-between mt-5 px-3">
                     <!-- Return button -->
                     <a href="{{ route('teams.index') }}"
                         class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 rounded">Volver</a>
