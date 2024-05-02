@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Services\TeamService;
+use Illuminate\Support\Collection;
 
 class GameController extends Controller
 {
@@ -20,9 +21,24 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::all();
+        // Get ell games
+        $games = Game::orderBy('game_number', 'asc')
+            ->orderBy('date', 'asc')
+            ->get();
 
-        return view('games.index', ['games' => $games]);
+        // Group games by game number.
+        $groupedGames = $this->groupGamesByGameNumber($games);
+
+        // Send grouped games to view.
+        return view('games.index', ['groupedGames' => $groupedGames]);
+    }
+
+    /**
+     * Group games by game number.
+     */
+    private function groupGamesByGameNumber(Collection $games)
+    {
+        return $games->groupBy('game_number');
     }
 
     /**
@@ -75,7 +91,8 @@ class GameController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teams = $this->teamService->getTeamsForActiveLeague();
+        return view('games.edit', ['game' => Game::findOrFail($id), 'teams' => $teams]);
     }
 
     /**
@@ -83,7 +100,25 @@ class GameController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([    
+            'game_number' => 'required|integer',
+            'date' => 'required|date',
+            'team1_id' => 'required',
+            'team2_id' => 'required',
+            'team1_goals' => 'required|integer',
+            'team2_goals' => 'required|integer'
+        ]);
+
+        $game = Game::findOrFail($id);
+        $game->game_number = $request->game_number;
+        $game->date = $request->date;
+        $game->team1_id = $request->team1_id;
+        $game->team2_id = $request->team2_id;
+        $game->team1_goals = $request->team1_goals;
+        $game->team2_goals = $request->team2_goals;
+        $game->save();
+
+        return redirect()->route('games.index');
     }
 
     /**
@@ -91,6 +126,7 @@ class GameController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Game::destroy($id);
+        return redirect()->route('games.index');
     }
 }

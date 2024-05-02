@@ -6,7 +6,7 @@
     <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
         <span class="flex-grow block border-t border-gray-700"></span>
         <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-900 text-white">
-            Partidos
+            Partidos {{ $activeLeague ? $activeLeague->name : '' }}
         </span>
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
@@ -26,50 +26,67 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($games->groupBy('game_number') as $game_number => $groupedGames)
+                @foreach ($groupedGames as $game_number => $groupedGames)
 
                     <tr>
                         <!-- Game number -->
-                        <td class="px-6 py-4 min-w-20 bg-gray-600" colspan="6">
+                        <td class="px-6 py-1 min-w-20 bg-gray-600" colspan="6">
                             Jornada {{ $game_number }}
                         </td>
                     </tr>
 
                     @foreach ($groupedGames as $game)
                         <tr class="{{ $loop->even ? 'bg-gray-900' : 'bg-gray-800' }}">
-                            <!-- Team 1 -->
+                            <!-- Team 1 logo -->
                             <td class="px-6 py-4 min-w-20">
                                 <img src="{{ asset('logos/' . $game->team1->logo) }}" alt="{{ $game->team1->name }}"
                                     style="width: 24px; height: 24px;">
                             </td>
+                            <!-- Team 1 name -->
                             <td class="px-6 py-4 min-w-40">
                                 {{ $game->team1->name }}
                             </td>
+                            <!-- Team 1 goals -->
                             <td class="px-6 py-4">
                                 {{ $game->team1_goals }}
                             </td>
                             <!-- Date -->
                             <td class="border-b border-gray-700 px-6 py-4" rowspan="2">
-                                {{ date('d/m/Y', strtotime($game->date)) }}
+                                {{ \Carbon\Carbon::parse($game->date)->translatedFormat('D d/m/y') }}
                             </td>
-                            <!-- Edit -->
+                            <!-- Edit button -->
                             <td class="border-b border-gray-700 px-6 py-4" rowspan="2">
-                                Edit
+                                <form action="{{ route('games.edit', $game->id) }}" method="get">
+                                    @csrf
+                                    <button type="submit"
+                                        class="text-white/50 hover:text-white py-2 px-4">
+                                        <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
+                                    </button>
+                                </form>
                             </td>
-                            <!-- Delete -->
+                            <!-- Delete button -->
                             <td class="border-b border-gray-700 px-6 py-4" rowspan="2">
-                                Delete
+                                <form action="{{ route('games.destroy', $game->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('¿Eliminar ese partido?\nEsta acción no se puede deshacer.')"
+                                    class="text-white/50 hover:text-white py-2 px-4">
+                                        <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         <tr class="border-b border-gray-700 {{ $loop->even ? 'bg-gray-900' : 'bg-gray-800' }}">
-                            <!-- Team 2 -->
+                            <!-- Team 2 logo -->
                             <td class="px-6 py-4">
                                 <img src="{{ asset('logos/' . $game->team2->logo) }}" alt="{{ $game->team2->name }}"
                                     width="24" height="24s">
                             </td>
+                            <!-- Team 2 name -->
                             <td class="px-6 py-4">
                                 {{ $game->team2->name }}
                             </td>
+                            <!-- Team 2 goals -->
                             <td class="px-6 py-4">
                                 {{ $game->team2_goals }}
                             </td>
