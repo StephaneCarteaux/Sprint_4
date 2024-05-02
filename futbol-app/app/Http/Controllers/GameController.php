@@ -21,7 +21,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        // Get ell games
+        // Get all games
         $games = Game::orderBy('game_number', 'asc')
             ->orderBy('date', 'asc')
             ->get();
