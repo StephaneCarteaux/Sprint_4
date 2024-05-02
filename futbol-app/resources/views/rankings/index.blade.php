@@ -39,7 +39,7 @@
                         <td class="px-6 py-4">{{ $team->name }}</td>
                         <td class="px-6 py-4">{{ $team->games_played }}</td>
                         <td class="px-6 py-4">{{ $team->games_won }}</td>
-                        <td class="px-6 py-4">{{ $team->games_drawn }}</td>
+                        <td class="px-6 py-4">{{ $team->draws }}</td>
                         <td class="px-6 py-4">{{ $team->games_lost }}</td>
                         <td class="px-6 py-4">{{ $team->goals_scored }}</td>
                         <td class="px-6 py-4">{{ $team->goals_conceded }}</td>

@@ -87,10 +87,9 @@ class RankingController extends Controller
 
         // Get complete information based on calculated statistics
         $teams = [];
-        foreach ($teamStats as $teamId => $stats) {
+        foreach ($teamStats as $teamId => &$stats) {
             $team = \App\Models\Team::find($teamId);
             if ($team) {
-
                 $team->games_played = $stats['games_played'];
                 $team->games_won = $stats['games_won'];
                 $team->draws = $stats['draws'];
