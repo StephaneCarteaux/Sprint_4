@@ -26,7 +26,8 @@
             <tbody>
                 @foreach ($teams as $team)
                     <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
-                        <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}" width="48" height="48"></td>
+                        <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
+                                width="48" height="48"></td>
                         <td class="px-6 py-4">{{ $team->name }}</td>
 
                         <!-- Edit button-->
@@ -47,7 +48,8 @@
                                 <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
                                     onclick="return confirm('¿Eliminar {{ $team->name }}?')"
                                     class="py-2 px-4 {{ $team->league->started ? 'text-white/20 hover:text-white/20 cursor-not-allowed' : 'text-white/50 hover:text-white' }}">
-                                    <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
+                                    <i class="fa-solid fa-trash-can fa-xl"
+                                        title="{{ $team->league->started ? 'Liga iniciada. No se pueden eliminar equipos' : 'Eliminar' }}"></i>
                                 </button>
                             </form>
                         </td>
@@ -63,8 +65,9 @@
         <form action="{{ route('teams.create') }}" method="get">
             @csrf
             <button type="submit"
-                class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 border rounded">Crear
-                equipo</button>
+                class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 border rounded {{$team->league->started ? 'hidden' : ''}}">
+                Crear equipo
+            </button>
         </form>
     </div>
 </x-layout>
