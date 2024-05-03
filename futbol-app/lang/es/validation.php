@@ -190,6 +190,12 @@ return [
 
     'attributes' => [
         'name' => 'nombre',
+        'game_number' => 'jornada',
+        'date' => 'fecha',
+        'team1_id' => 'equipo local',
+        'team2_id' => 'equipo visitante',
+        'team1_goals' => 'goles equipo local',
+        'team2_goals' => 'goles equipo visitante',
     ],
 
 ];

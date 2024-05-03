@@ -13,7 +13,7 @@
         </h2>
 
         <!-- Errors template -->
-        <x-errors />
+        {{-- <x-errors /> --}}
 
         <div
             class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
@@ -38,6 +38,7 @@
                         <label for="date" class="block mb-1 text-sm font-medium">Fecha:</label>
                         <input type="date" id="date" name="date" value="{{ old('date') }}"
                             class="border border-gray-700 text-sm rounded-lg block w-full pl-2 pt-1 h-9">
+
                     </div>
                 </div>
 
@@ -50,6 +51,7 @@
                             local:</label>
                         <select id="team1_id" name="team1_id"
                             class="border border-gray-700 appearance-none w-full text-sm rounded-lg p-2">
+                            <option disabled="disabled" selected="selected">Seleciona...</option>
                             @foreach ($teams as $team)
                                 <option value="{{ $team->id }}"
                                     {{ old('team1_id') == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
@@ -74,6 +76,7 @@
                             visitante:</label>
                         <select id="team2_id" name="team2_id"
                             class="border border-gray-700 appearance-none w-full text-sm rounded-lg p-2">
+                            <option disabled="disabled" selected="selected">Seleciona...</option>
                             @foreach ($teams as $team)
                                 <option value="{{ $team->id }}"
                                     {{ old('team2_id') == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
