@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Team;
+use Illuminate\Validation\Rule;
 
 
 class TeamController extends Controller
@@ -35,8 +36,17 @@ class TeamController extends Controller
     {
         $request->validate([
             'league_id' => 'required',
-            'name' => 'required',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'name' => [
+                'required',
+                Rule::unique('teams')->where(function ($query) use ($request) {
+                    return $query->where('league_id', $request->league_id);
+                })
+            ],
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            
+        ], [
+            'name.unique' => 'Ese nombre ya existe en esta liga.'
+
         ]);
 
         Team::create([
@@ -70,19 +80,26 @@ class TeamController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => [
+                'required',
+                Rule::unique('teams')->where(function ($query) use ($request) {
+                    return $query->where('league_id', $request->league_id);
+                })
+            ],
+        ], [
+            'name.unique' => 'Ese nombre ya existe en esta liga.'
         ]);
 
         $team = Team::findOrFail($id);
         $team->name = $request->name;
 
-        if($request->hasFile('logo')) {
+        if ($request->hasFile('logo')) {
             if ($team->logo) {
                 Storage::disk('logos')->delete($team->logo);
             }
             $team->logo = $request->file('logo')->store(options: 'logos');
         }
-        
+
         $team->save();
 
         return redirect()->route('teams.index');
@@ -91,11 +108,11 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-   public function destroy(string $id)
+    public function destroy(string $id)
     {
-            $logo = Team::find($id)->logo;
-            Team::destroy($id);
-            Storage::disk('logos')->delete($logo);
-            return redirect()->route('teams.index');
+        $logo = Team::find($id)->logo;
+        Team::destroy($id);
+        Storage::disk('logos')->delete($logo);
+        return redirect()->route('teams.index');
     }
 }

@@ -19,12 +19,15 @@
             <form action="{{ route('teams.update', $team->id) }} " method="post" enctype="multipart/form-data" class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
                 @method('PATCH')
+                
+                <!-- League Id -->
+                <input type="hidden" id="league_id" name="league_id" value="{{ $activeLeague->id }}">
 
                 <!-- Name -->
                 <div class="mb-5 px-3">
                     <label for="name" class="block mb-1 text-sm font-medium text-white">Name:</label>
-                    <input type="text" id="name" name="name"
-                        class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white" value="{{ $team->name }}">
+                    <input type="text" id="name" name="name" value="{{ $team->name }}"
+                        class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white">
                 </div>
 
                 <!--  Actual logo -->
