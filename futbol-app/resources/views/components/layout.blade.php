@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
-<body class="flex flex-col h-screen justify-between">
+<body class="flex flex-col h-screen justify-between bg-gray-50 text-gray-700">
 
     <!-- Responsive navbar-->
-    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+    <nav class="flex items-center justify-between flex-wrap bg-sky-800 p-6">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
             <svg class="mr-2" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="44px" height="44px"
@@ -37,22 +37,22 @@
             <div class="text-sm lg:flex-grow">
                 <!-- Games -->
                 <a href="{{ route('games.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('games*') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4 {{ request()->is('games*') ? 'text-white underline underline-offset-8 decoration-2' : '' }}">
                     Partidos
                 </a>
                 <!-- Ranking -->
                 <a href="{{ route('ranking.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('ranking*') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4 {{ request()->is('ranking*') ? 'text-white underline underline-offset-8 decoration-2' : '' }}">
                     Clasificación
                 </a>
                 <!-- Teams -->
                 <a href="{{ route('teams.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('teams*') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4 {{ request()->is('teams*') ? 'text-white underline underline-offset-8 decoration-2' : '' }}">
                     Equipos
                 </a>
                 <!-- Leagues -->
                 <a href="{{ route('leagues.index') }}"
-                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4 {{ request()->is('leagues*') ? 'text-white' : '' }}">
+                    class="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4 {{ request()->is('leagues*') ? 'text-white underline underline-offset-8 decoration-2' : '' }}">
                     Gestionar ligas
                 </a>
 
@@ -65,9 +65,9 @@
         {{ $slot }}
     </div>
     <!-- Footer-->
-    <footer class="bg-teal-500 text-center">
+    <footer class="bg-sky-800 text-center">
         <div class="text-white text-sm p-3">
-          <span clas="font-semibold">© 2023 Super futbol league</span>
+          <span clas="font-semibold">© {{ now()->year }} Super futbol league</span>
         </div>
       </footer>
 

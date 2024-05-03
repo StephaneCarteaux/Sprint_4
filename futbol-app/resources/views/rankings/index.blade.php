@@ -5,7 +5,7 @@
 
     <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
         <span class="flex-grow block border-t border-gray-700"></span>
-        <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-900 text-white">
+        <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
             Clasificación {{ $activeLeague ? $activeLeague->name : '' }}
         </span>
         <span class="flex-grow block border-t border-gray-700"></span>
@@ -13,8 +13,8 @@
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
 
-        <table class="w-full text-sm text-left rtl:text-right text-gray-400">
-            <thead class="text-xs text-gray-200 uppercase bg-gray-700">
+        <table class="w-full text-sm text-left rtl:text-right">
+            <thead class="text-xs text-white uppercase bg-gray-700">
                 <tr>
                     <th class="px-6 py-3"></th>
                     <th class="px-6 py-3"></th>
@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 @foreach ($teams as $team)
-                    <tr class="odd:bg-gray-900 even:bg-gray-800 border-b border-gray-700">
+                    <tr class="odd:bg-gray-100 even:bg-gray-200 border-t border-gray-400">
                         <td class="px-6 py-4">{{ $team->ranking_position }}</td>
                         <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
                                 style="width: 24px; height: 24px;"></td>
