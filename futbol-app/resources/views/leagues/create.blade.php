@@ -26,8 +26,8 @@
                 <!-- Name -->
                 <div class="mb-5 px-3">
                     <label for="name" class="block mb-1 text-sm font-medium text-white">Nombre:</label>
-                    <input type="text" id="name" name="name"
-                        class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>">
+                    <input type="text" id="name" name="name" value="{{ old('name') }}"
+                        class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white">
                 </div>
 
                 <div class="flex justify-between mt-5 px-3">

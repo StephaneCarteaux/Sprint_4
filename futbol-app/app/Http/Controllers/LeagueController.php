@@ -31,7 +31,7 @@ class LeagueController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:leagues',
             'started' => 'required',
             'active' => 'required'
         ]);
@@ -67,7 +67,7 @@ class LeagueController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|unique:leagues'
         ]);
 
         $league = League::findOrFail($id);
