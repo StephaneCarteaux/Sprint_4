@@ -11,7 +11,8 @@
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
+    <div
+        class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16 {{ $teams->count() ? '' : 'invisible' }}">
 
         <table class="w-full text-sm text-left rtl:text-right">
             <thead class="text-xs text-white uppercase bg-gray-700">
@@ -25,6 +26,7 @@
             </thead>
             <tbody>
                 @foreach ($teams as $team)
+                    <!-- Team logo-->
                     <tr class="odd:bg-gray-100 even:bg-gray-200 border-t border-gray-400">
                         <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
                                 style="width: 48px; height: 48px;">
@@ -64,13 +66,21 @@
         </table>
     </div>
     <div class="flex justify-center">
-        <!-- Create button -->
-        <form action="{{ route('teams.create') }}" method="get">
-            @csrf
-            <button type="submit"
-                class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-green-700 text-white py-2 px-4 border rounded {{ $team->league->started ? 'hidden' : '' }}">
-                Crear equipo
-            </button>
-        </form>
+        @if ($getLeagues->count() > 0)
+            <!-- Create button -->
+            <form action="{{ route('teams.create') }}" method="get">
+                @csrf
+                <button type="submit"
+                    class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 border rounded {{ $activeLeagueIsStarted ? 'hidden' : '' }}">
+                    Crear equipo
+                </button>
+            </form>
+        @else
+            <span
+                class="mt-4 p-0.5 mb-2 flex-none block mx-4 px-4 py-2.5 border-2 border-gray-700 rounded leading-none font-medium">
+                Tienes que crear una liga para poder crear equipos
+            </span>
+        @endif
+
     </div>
 </x-layout>

@@ -11,14 +11,14 @@
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16 {{ $teams ? '' : 'invisible'}}">
 
         <table class="w-full text-sm text-left rtl:text-right">
             <thead class="text-xs text-white uppercase bg-gray-700">
                 <tr>
+                    <th class="px-2 py-3"></th>
                     <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
+                    <th class="px-12 py-3"></th>
                     <th class="px-6 py-3">PJ</th>
                     <th class="px-6 py-3">V</th>
                     <th class="px-6 py-3">E</th>
@@ -32,11 +32,11 @@
             </thead>
             <tbody>
                 @foreach ($teams as $team)
-                    <tr class="odd:bg-gray-100 even:bg-gray-200 border-t border-gray-400">
+                    <tr class="odd:bg-gray-100 even:bg-gray-200 border-t border-gray-00">
                         <td class="px-6 py-4">{{ $team->ranking_position }}</td>
-                        <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
+                        <td class="px-2 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
                                 style="width: 24px; height: 24px;"></td>
-                        <td class="px-6 py-4">{{ $team->name }}</td>
+                        <td class="px-2 py-4">{{ $team->name }}</td>
                         <td class="px-6 py-4">{{ $team->games_played }}</td>
                         <td class="px-6 py-4">{{ $team->games_won }}</td>
                         <td class="px-6 py-4">{{ $team->draws }}</td>
@@ -51,6 +51,17 @@
             </tbody>
 
         </table>
+    </div>
+    <div class="flex justify-center">
+        <!-- Create button -->
+        @if (!$teams)
+        <span class="mt-4 p-0.5 mb-2 flex-none block mx-4 px-4 py-2.5 border-2 border-gray-700 rounded leading-none font-medium">
+            Aun no hay partidos
+        </span>
+        
+        
+        @endif
+
     </div>
     
 </x-layout>

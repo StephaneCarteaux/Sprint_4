@@ -30,10 +30,10 @@
                 <div class="flex justify-between mt-5 px-3">
                     <!-- Return button -->
                     <a href="{{ route('leagues.index') }}"
-                    class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-green-700 text-white py-2 px-4 rounded">Volver</a>
+                    class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">Volver</a>
                     <!-- Send button -->
                         <input type="submit" value="Enviar"
-                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-green-700 text-white py-2 px-4 rounded">
+                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">
                 </div>
             </form>
         </div>

@@ -29,7 +29,7 @@
             <span class="font-semibold text-xl tracking-tight">Super futbol league</span>
             <!-- Active league -->
             <span
-                class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white ml-6 {{ $activeLeague ? '' : 'hidden' }}">{{ $activeLeague->name ?? '' }}</span>
+                class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white ml-6 {{ $activeLeague ? '' : 'invisible' }}">{{ $activeLeague->name ?? '' }}</span>
         </div>
 
 

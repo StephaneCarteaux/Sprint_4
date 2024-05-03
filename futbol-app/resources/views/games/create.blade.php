@@ -46,7 +46,7 @@
                 <div class="flex flex-wrap">
 
                     <!-- team 1 name -->
-                    <div class="w-full md:w-3/4 px-3 mb-5">
+                    <div class="w-full md:w-3/4 px-3 mb-5 relative">
                         <label for="team1_id" class="block mb-1 text-sm font-medium">Equipo
                             local:</label>
                         <select id="team1_id" name="team1_id"
@@ -57,6 +57,12 @@
                                     {{ old('team1_id') == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
                             @endforeach
                         </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-3 top-5 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </div>
                     </div>
 
                     <!-- team 1 goals -->
@@ -71,7 +77,7 @@
                 <div class="flex flex-wrap">
 
                     <!-- team 2 name -->
-                    <div class="w-full md:w-3/4 px-3 mb-5">
+                    <div class="w-full md:w-3/4 px-3 mb-5 relative">
                         <label for="team2_id" class="block mb-1 text-sm font-medium">Equipo
                             visitante:</label>
                         <select id="team2_id" name="team2_id"
@@ -82,6 +88,12 @@
                                     {{ old('team2_id') == $team->id ? 'selected' : '' }}>{{ $team->name }}</option>
                             @endforeach
                         </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-3 top-5 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </div>
                     </div>
 
                     <!-- team 2 goals -->
@@ -96,11 +108,11 @@
 
                     <!-- Return button -->
                     <a href="{{ route('games.index') }}"
-                        class="mt-4  mb-2 bg-gray-900 hover:bg-green-700 text-white py-2 px-4 rounded">Volver</a>
+                        class="mt-4  mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">Volver</a>
 
                     <!-- Send button -->
                     <input type="submit" value="Enviar"
-                        class="mt-4  mb-2 bg-gray-900 hover:bg-green-700 text-white py-2 px-4 rounded">
+                        class="mt-4  mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">
                 </div>
 
             </form>

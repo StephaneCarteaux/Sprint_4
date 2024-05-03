@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Services\TeamService;
+use App\Services\LeagueService;
 use Illuminate\Support\Collection;
 
 class GameController extends Controller
 {
     protected $teamService;
+    protected $leagueService;
 
-    public function __construct(TeamService $teamService)
+    public function __construct(TeamService $teamService, LeagueService $leagueService)
     {
         $this->teamService = $teamService;
+        $this->leagueService = $leagueService;
     }
 
     /**
@@ -28,9 +31,13 @@ class GameController extends Controller
 
         // Group games by game number.
         $groupedGames = $this->groupGamesByGameNumber($games);
+        $activeLeagueIsStarted = $this->leagueService->activeLeagueIsStarted();
 
         // Send grouped games to view.
-        return view('games.index', ['groupedGames' => $groupedGames]);
+        return view('games.index', [
+            'groupedGames' => $groupedGames,
+            'activeLeagueIsStarted' => $activeLeagueIsStarted
+        ]);
     }
 
     /**

@@ -11,7 +11,7 @@
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16 {{ $leagues->count() ? '' : 'invisible'}}">
 
         <table class="w-full text-sm text-left rtl:text-right">
             <thead class="text-xs text-white uppercase bg-gray-700">
@@ -91,7 +91,7 @@
         <form action="{{ route('leagues.create') }}" method="get">
             @csrf
             <button type="submit"
-                class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-green-700 text-white py-2 px-4 rounded">Crear
+                class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 rounded">Crear
                 liga</button>
         </form>
     </div>
