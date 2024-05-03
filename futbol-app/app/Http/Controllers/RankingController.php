@@ -76,8 +76,8 @@ class RankingController extends Controller
         }
 
         // Calculate points for each team
-        foreach ($teamStats as &$stats) {
-            $stats['points'] = $stats['games_won'] * 3 + $stats['draws'];
+        foreach ($teamStats as $teamId => $stats) {
+            $teamStats[$teamId]['points'] = $stats['games_won'] * 3 + $stats['draws'];
         }
 
         // Sort teams by points
@@ -87,7 +87,7 @@ class RankingController extends Controller
 
         // Get complete information based on calculated statistics
         $teams = [];
-        foreach ($teamStats as $teamId => &$stats) {
+        foreach ($teamStats as $teamId => $stats) {
             $team = \App\Models\Team::find($teamId);
             if ($team) {
                 $team->games_played = $stats['games_played'];
