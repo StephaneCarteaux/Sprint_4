@@ -35,7 +35,7 @@
                     </tr>
 
                     @foreach ($groupedGames as $game)
-                        <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-gray-200' }}">
+                        <tr class="{{ $loop->odd ? 'bg-gray-100' : 'bg-gray-200' }}">
                             <!-- Team 1 logo -->
                             <td class="border-t border-gray-400 px-6 py-4 min-w-20">
                                 <img src="{{ asset('logos/' . $game->team1->logo) }}" alt="{{ $game->team1->name }}"
@@ -75,7 +75,7 @@
                                 </form>
                             </td>
                         </tr>
-                        <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-gray-200' }}">
+                        <tr class="{{ $loop->odd ? 'bg-gray-100' : 'bg-gray-200' }}">
                             <!-- Team 2 logo -->
                             <td class="px-6 py-4">
                                 <img src="{{ asset('logos/' . $game->team2->logo) }}" alt="{{ $game->team2->name }}"
