@@ -26,7 +26,7 @@
                     <th class="px-6 py-3">GF</th>
                     <th class="px-6 py-3">GC</th>
                     <th class="px-6 py-3">DG</th>
-                    <th class="px-6 py-3">Pts</th>
+                    <th class="px-6 py-3">PTS</th>
 
                 </tr>
             </thead>
@@ -44,7 +44,7 @@
                         <td class="px-6 py-4">{{ $team->goals_scored }}</td>
                         <td class="px-6 py-4">{{ $team->goals_conceded }}</td>
                         <td class="px-6 py-4">{{ $team->goals_difference }}</td>
-                        <td class="px-6 py-4">{{ $team->points }}</td>
+                        <td class="px-6 py-4 font-bold">{{ $team->points }}</td>
                     </tr>
                 @endforeach
 
