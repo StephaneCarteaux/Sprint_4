@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 use App\Models\Team;
 use App\Models\Game;
 use Illuminate\Database\Eloquent\Collection;
+use App\Services\RankingService;
 
 class RankingController extends Controller
 {
+    protected $rankingService;
+
+    public function __construct(RankingService $rankingService)
+    {
+        $this->rankingService = $rankingService;
+    }
+
     public function index()
     {
         // Get all games
@@ -81,9 +89,13 @@ class RankingController extends Controller
         }
 
         // Sort teams by points
-        uasort($teamStats, function ($a, $b) {
-            return $b['points'] - $a['points'];
-        });
+        // uasort($teamStats, function ($a, $b) {
+        //     return $b['points'] - $a['points'];
+        // });
+
+        // Get ranking
+        uasort($teamStats, [$this->rankingService, 'getRanking']);
+
 
         // Get complete information based on calculated statistics
         $teams = [];
@@ -102,7 +114,7 @@ class RankingController extends Controller
             }
         }
 
-        // Añadir posición de cada equipo en el ranking
+        // Add ranking position
         $rankingPosition = 1;
         foreach ($teams as $team) {
             $team->ranking_position = $rankingPosition;
