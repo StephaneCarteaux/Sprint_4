@@ -12,14 +12,14 @@
     </h2>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16  {{ $groupedGames->count() ? '' : 'invisible' }}">
-
+        
         <table class="w-full text-sm text-left rtl:text-right">
             <thead class="text-xs text-white uppercase bg-gray-700">
                 <tr>
+                    <th class="px-6 py-3 min-w-20"></th>
+                    <th class="px-6 py-3 min-w-40"></th>
                     <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
-                    <th class="px-6 py-3"></th>
-                    <th class="px-20 py-3"></th>
+                    <th class="px-6 py-3 min-w-40"></th>
                     <th class="px-6 py-3">Editar</th>
                     <th class="px-6 py-3">Eliminar</th>
 
@@ -37,16 +37,16 @@
                     @foreach ($groupedGames as $game)
                         <tr class="{{ $loop->odd ? 'bg-gray-100' : 'bg-gray-200' }}">
                             <!-- Team 1 logo -->
-                            <td class="border-t border-gray-400 px-6 py-4 min-w-20">
+                            <td class="border-t border-gray-400 px-6 py-4">
                                 <img src="{{ asset('logos/' . $game->team1->logo) }}" alt="{{ $game->team1->name }}"
                                     style="width: 24px; height: 24px;">
                             </td>
                             <!-- Team 1 name -->
-                            <td class="border-t border-gray-400 px-6 py-4 min-w-40">
+                            <td class="border-t border-gray-400 px-6 py-4">
                                 {{ $game->team1->name }}
                             </td>
                             <!-- Team 1 goals -->
-                            <td class="border-t border-gray-400 px-2 py-4">
+                            <td class="border-t border-gray-400 px-6 py-4">
                                 {{ $game->team1_goals }}
                             </td>
                             <!-- Date -->
@@ -86,7 +86,7 @@
                                 {{ $game->team2->name }}
                             </td>
                             <!-- Team 2 goals -->
-                            <td class="px-2 py-4">
+                            <td class="px-6 py-4">
                                 {{ $game->team2_goals }}
                             </td>
                         </tr>

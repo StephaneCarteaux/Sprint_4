@@ -12,13 +12,13 @@
     </h2>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16 {{ $teams ? '' : 'invisible'}}">
-
+        
         <table class="w-full text-sm text-left rtl:text-right">
             <thead class="text-xs text-white uppercase bg-gray-700">
                 <tr>
-                    <th class="px-2 py-3"></th>
                     <th class="px-6 py-3"></th>
-                    <th class="px-12 py-3"></th>
+                    <th class="px-6 py-3 min-w-20"></th>
+                    <th class="px-6 py-3 min-w-40"></th>
                     <th class="px-6 py-3">PJ</th>
                     <th class="px-6 py-3">V</th>
                     <th class="px-6 py-3">E</th>
@@ -34,9 +34,9 @@
                 @foreach ($teams as $team)
                     <tr class="odd:bg-gray-100 even:bg-gray-200 border-t border-gray-00">
                         <td class="px-6 py-4">{{ $team->ranking_position }}</td>
-                        <td class="px-2 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
+                        <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
                                 style="width: 24px; height: 24px;"></td>
-                        <td class="px-2 py-4">{{ $team->name }}</td>
+                        <td class="px-6 py-4">{{ $team->name }}</td>
                         <td class="px-6 py-4">{{ $team->games_played }}</td>
                         <td class="px-6 py-4">{{ $team->games_won }}</td>
                         <td class="px-6 py-4">{{ $team->draws }}</td>
