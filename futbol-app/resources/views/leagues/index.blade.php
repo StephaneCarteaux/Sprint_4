@@ -37,7 +37,7 @@
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" id="started" name="started" value="1">
-                                <button type="submit" {{ $league->started ? 'disabled' : '' }}
+                                <button type="submit" {{ $league->started ? 'disabled' : '' }} onclick="return confirm('¿Iniciar {{ $league->name }}?\nYa no se podrán crear ni eliminar equipos para esta liga.')"
                                     class="py-2 px-4 {{ $league->started ? 'text-green-700 cursor-not-allowed' : 'text-gray-700 hover:text-green-700' }}">
                                     <i class="fa-solid fa-play fa-xl" title="{{ $league->started ? 'Liga iniciada' : 'Iniciar'}}"></i>
                                 </button>
