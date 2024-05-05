@@ -109,7 +109,7 @@
             </form>
         @else
         <span class="mt-4 p-0.5 mb-2 flex-none block mx-4 px-4 py-2.5 border-2 border-gray-700 rounded leading-none font-medium">
-            Tienes que iniciar una liga para poder crear partidos
+            Tienes que iniciar la liga para poder crear partidos
         </span>
         @endif
 
