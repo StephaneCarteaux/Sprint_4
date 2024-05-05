@@ -1,5 +1,5 @@
 <html>
-    
+
 <head>
     <title>{{ $title ?? 'Liga' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
