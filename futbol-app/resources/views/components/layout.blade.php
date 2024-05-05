@@ -1,10 +1,10 @@
 <html>
-
+    
 <head>
     <title>{{ $title ?? 'Liga' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/mobileMenu.js"></script>
-    <script src="/js/leaguesDropdown.js"></script>
+    <script src={{ asset('js/leaguesDropdown.js') }}></script>
+    <script src={{ asset('js/mobileMenu.js') }}></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
