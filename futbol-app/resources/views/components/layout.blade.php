@@ -75,7 +75,7 @@
                     <button type="button"
                         class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm mt-6 lg:mt-0 text-white ring-1 ring-inset ring-white"
                         id="activeLeagueButton">
-                        {{ $activeLeague->name }}
+                        {{ $activeLeague ? $activeLeague->name : 'Liga activa' }}
                         <svg id="activeLeagueButtonIcon" class="-mr-1 h-5 w-5 text-white" viewBox="0 0 20 20"
                             fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -86,7 +86,7 @@
                 </div>
 
                 <!-- Menu -->
-                <div class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right left-0 rounded-md bg-gray-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                <div class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right left-0 rounded-md bg-gray-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none {{ !$activeLeague ? 'invisible' : '' }}"
                     tabindex="-1" id="activeLeagueMenu">
                     <div class="py-2" role="none">
 
