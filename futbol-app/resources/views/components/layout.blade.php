@@ -68,7 +68,6 @@
             </a>
 
             <!-- League dropdown -->
-
             <!-- Button -->
             <div class="relative inline-block text-left lg:ml-2">
                 <div>
@@ -85,7 +84,7 @@
                     </button>
                 </div>
 
-                <!-- Menu -->
+                <!-- Button -->
                 <div class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right left-0 rounded-md bg-gray-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none {{ !$activeLeague ? 'invisible' : '' }}"
                     tabindex="-1" id="activeLeagueMenu">
                     <div class="py-2" role="none">
