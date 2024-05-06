@@ -32,7 +32,7 @@
                 </g>
             </svg>
 
-            <!-- Title -->
+            <!-- Title -- -->
             <span class="font-semibold text-xl tracking-tight">Super futbol league</span>
 
         </div>
