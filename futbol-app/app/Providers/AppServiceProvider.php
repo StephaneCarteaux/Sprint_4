@@ -23,9 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         if (Schema::hasTable('leagues')) {
             // We make active league available in all views
-        view()->share('activeLeague', League::where('active', 1)->first());
-        view()->share('allLeagues', League::all());
-    }
-        
+            view()->share('activeLeague', League::where('active', 1)->first());
+            view()->share('allLeagues', League::all());
+        }
     }
 }
