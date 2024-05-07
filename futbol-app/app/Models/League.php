@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-//use App\Events\LeagueSaved;
-//use App\Events\LeagueDeleted;
-//use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
