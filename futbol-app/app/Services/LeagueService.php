@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Utilities\LeagueUtility;
-use App\Models\Team;
 
 class LeagueService
 {
