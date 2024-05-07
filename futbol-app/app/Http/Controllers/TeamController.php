@@ -24,7 +24,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::all();
+        // Eager load the league
+        $teams = Team::with('league')->get();
         $activeLeagueIsStarted = $this->leagueService->activeLeagueIsStarted();
         $getLeagues = $this->leagueService->getLeagues();
         return view('teams.index', [
