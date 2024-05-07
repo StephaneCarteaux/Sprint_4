@@ -7,18 +7,32 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Team;
 use Illuminate\Validation\Rule;
+use App\Services\LeagueService;
 
 
 class TeamController extends Controller
 {
+    protected $leagueService;
+
+    public function __construct(LeagueService $leagueService)
+    {
+        $this->leagueService = $leagueService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $teams = Team::all();
-
-        return view('teams.index', ['teams' => $teams]);
+        // Eager load the league
+        $teams = Team::with('league')->get();
+        $activeLeagueIsStarted = $this->leagueService->activeLeagueIsStarted();
+        $getLeagues = $this->leagueService->getLeagues();
+        return view('teams.index', [
+            'teams' => $teams,
+            'activeLeagueIsStarted' => $activeLeagueIsStarted,
+            'getLeagues' => $getLeagues
+        ]);
     }
 
     /**

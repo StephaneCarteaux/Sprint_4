@@ -103,6 +103,22 @@ class LeagueController extends Controller
     }
 
     /**
+     * League dropdown.
+     */
+    public function dropdown(Request $request, string $id)
+    {
+        $request->validate([
+            'active' => 'required'
+        ]);
+
+        $league = League::findOrFail($id);
+        $league->active = $request->active;
+        $league->save();
+
+        return redirect()->back();
+    }
+
+    /**
      * Update the starteds field in storage.
      */
     public function start(Request $request, string $id)

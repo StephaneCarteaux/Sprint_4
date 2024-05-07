@@ -15,7 +15,7 @@
         <!-- Errors template -->
         <x-errors/>
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 mb-6 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
             <form action="{{ route('teams.update', $team->id) }} " method="post" enctype="multipart/form-data" class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
                 @method('PATCH')
@@ -46,10 +46,10 @@
                 <div class="flex justify-between mt-5 px-3">
                     <!-- Return button -->
                     <a href="{{ route('teams.index') }}"
-                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-green-700 text-white py-2 px-4 rounded">Volver</a>
+                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">Volver</a>
                     <!-- Send button -->
                     <input type="submit" value="Enviar"
-                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-green-700 text-white py-2 px-4 rounded">
+                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">
                 </div>
             </form>
         </div>
