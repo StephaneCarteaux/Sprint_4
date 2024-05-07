@@ -6,7 +6,9 @@ use App\Http\Requests\StoreLeagueRequest;
 use App\Http\Requests\UpdateLeagueRequest;
 use App\Http\Requests\ActivateLeagueRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\League;
+use App\Models\Team;
 
 class LeagueController extends Controller
 {
@@ -75,6 +77,14 @@ class LeagueController extends Controller
      */
     public function destroy(string $id)
     {
+        // As deleting a league also deletes the teams in that league, we also delete the logos of the teams
+        foreach (Team::where('league_id', $id)->get() as $team)
+        {
+            if ($team->logo) {
+                Storage::disk('logos')->delete($team->logo);
+            }
+        }
+
         League::destroy($id);
         return redirect()->route('leagues.index');
     }
