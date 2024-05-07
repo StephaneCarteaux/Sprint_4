@@ -24,8 +24,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        // Get all games
-        $games = Game::orderBy('game_number', 'asc')
+        // Eager load all games
+        $games = Game::with('team1', 'team2')->orderBy('game_number', 'asc')
             ->orderBy('date', 'asc')
             ->get();
 
@@ -51,7 +51,7 @@ class GameController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() 
+    public function create()
     {
         $teams = $this->teamService->getTeamsForActiveLeague();
         return view('games.create', ['teams' => $teams]);
@@ -62,7 +62,7 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([    
+        $request->validate([
             'league_id' => 'required',
             'game_number' => 'required|integer',
             'date' => 'required|date',
@@ -107,7 +107,7 @@ class GameController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([    
+        $request->validate([
             'game_number' => 'required|integer',
             'date' => 'required|date',
             'team1_id' => 'required',
