@@ -69,19 +69,17 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Team $team)
     {
-        return view('teams.edit', ['team' => Team::findOrFail($id)]);
+        return view('teams.edit', ['team' => $team]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTeamRequest $request, string $id)
+    public function update(UpdateTeamRequest $request, Team $team)
     {
         $validated = $request->validated();
-
-        $team = Team::findOrFail($id);
 
         if ($request->hasFile('logo')) {
             //TODO check if this if is necessary
@@ -99,11 +97,11 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Team $team)
     {
-        $logo = Team::find($id)->logo;
+        $logo = $team->logo;
         Storage::disk('logos')->delete($logo);
-        Team::destroy($id);
+        $team->delete();
         return redirect()->route('teams.index');
     }
 }

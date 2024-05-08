@@ -40,7 +40,7 @@
                         <!-- Start button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center">
-                                <form action="{{ route('leagues.start', $league->id) }}" method="post" class="mb-0">
+                                <form action="{{ route('leagues.start', $league) }}" method="post" class="mb-0">
                                     @csrf
                                     @method('PATCH')
                                     <input type="hidden" id="started" name="started" value="1">
@@ -57,7 +57,7 @@
                         <!-- Active button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center">
-                                <form action="{{ route('leagues.activate', $league->id) }}" method="post"
+                                <form action="{{ route('leagues.activate', $league) }}" method="post"
                                     class="mb-0">
                                     @csrf
                                     @method('PATCH')
@@ -74,7 +74,7 @@
                         <!-- Edit button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center">
-                                <a href="{{ route('leagues.edit', $league->id) }}">
+                                <a href="{{ route('leagues.edit', $league) }}">
                                     <i class="fa-solid fa-pen-to-square fa-xl hover:text-green-700" title="Editar"></i>
                                 </a>
                             </div>
@@ -84,7 +84,7 @@
                         <!-- Delete button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center items-center">
-                                <form action="{{ route('leagues.destroy', $league->id) }}" method="post" class="mb-0">
+                                <form action="{{ route('leagues.destroy', $league) }}" method="post" class="mb-0">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
