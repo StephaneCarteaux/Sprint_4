@@ -36,7 +36,7 @@ class GameSeeder extends Seeder
                 'league_id' => 1,
                 'team1_id' => 1,
                 'team2_id' => 3,
-                'game_number' => 4,
+                'game_number' => 2,
                 'date' => '2024-04-27 00:00:00',
                 'team1_goals' => 3,
                 'team2_goals' => 1

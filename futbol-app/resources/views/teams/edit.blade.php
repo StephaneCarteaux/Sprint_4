@@ -19,9 +19,6 @@
             <form action="{{ route('teams.update', $team->id) }} " method="post" enctype="multipart/form-data" class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
                 @method('PATCH')
-                
-                <!-- League Id -->
-                <input type="hidden" id="league_id" name="league_id" value="{{ $activeLeague->id }}">
 
                 <!-- Name -->
                 <div class="mb-5 px-3">

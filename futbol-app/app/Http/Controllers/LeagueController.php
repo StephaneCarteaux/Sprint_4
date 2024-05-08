@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLeagueRequest;
+use App\Http\Requests\UpdateLeagueRequest;
+use App\Http\Requests\ActivateLeagueRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\League;
+use App\Models\Team;
 
 class LeagueController extends Controller
 {
@@ -12,7 +17,8 @@ class LeagueController extends Controller
      */
     public function index()
     {
-        $leagues = League::all();
+        $leagues = League::orderBy('id', 'asc')
+            ->get();
 
         return view('leagues.index', ['leagues' => $leagues]);
     }
@@ -28,19 +34,11 @@ class LeagueController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLeagueRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:leagues',
-            'started' => 'required',
-            'active' => 'required'
-        ]);
+        $validated = $request->validated();
 
-        League::create([
-            'name' => $request->name,
-            'started' => $request->started,
-            'active' => $request->active
-        ]);
+        League::create($validated);
 
         return redirect()->route('leagues.index');
     }
@@ -64,15 +62,12 @@ class LeagueController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateLeagueRequest $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|unique:leagues'
-        ]);
+        $validated = $request->validated();
 
         $league = League::findOrFail($id);
-        $league->name = $request->name;
-        $league->save();
+        $league->update($validated);
 
         return redirect()->route('leagues.index');
     }
@@ -82,6 +77,14 @@ class LeagueController extends Controller
      */
     public function destroy(string $id)
     {
+        // As deleting a league also deletes the teams in that league, we also delete the logos of the teams
+        foreach (Team::where('league_id', $id)->get() as $team)
+        {
+            if ($team->logo) {
+                Storage::disk('logos')->delete($team->logo);
+            }
+        }
+
         League::destroy($id);
         return redirect()->route('leagues.index');
     }
@@ -89,14 +92,14 @@ class LeagueController extends Controller
     /**
      * Update the active field in storage.
      */
-    public function activate(Request $request, string $id)
+    public function activate(ActivateLeagueRequest $request, string $id)
     {
-        $request->validate([
-            'active' => 'required'
-        ]);
+        $validated = $request->validated();
 
         $league = League::findOrFail($id);
-        $league->active = $request->active;
+        $league->active = $validated['active'];
+        // Here we use the save() method to be able to fire the saving event.
+        // We use it in the model booted() method to propagate the change.
         $league->save();
 
         return redirect()->route('leagues.index');
