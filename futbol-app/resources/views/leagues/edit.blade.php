@@ -15,8 +15,8 @@
         <!-- Errors template -->
         <x-errors/>
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
-            <form action="{{ route('leagues.update', $league->id) }} " method="post" class="max-w-sm mx-auto mt-8 mb-8">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 mb-6 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
+            <form action="{{ route('leagues.update', $league) }} " method="post" class="max-w-sm mx-auto mt-8 mb-8">
                 @csrf
                 @method('PATCH')
 
@@ -28,9 +28,11 @@
                 </div>
 
                 <div class="flex justify-between mt-5 px-3">
+
                     <!-- Return button -->
                     <a href="{{ route('leagues.index') }}"
                     class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">Volver</a>
+                    
                     <!-- Send button -->
                         <input type="submit" value="Enviar"
                         class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">

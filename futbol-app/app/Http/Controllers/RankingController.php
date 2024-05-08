@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Models\Team;
 use App\Models\Game;
-use Illuminate\Database\Eloquent\Collection;
 use App\Services\RankingService;
 
 class RankingController extends Controller
@@ -87,11 +83,6 @@ class RankingController extends Controller
         foreach ($teamStats as $teamId => $stats) {
             $teamStats[$teamId]['points'] = $stats['games_won'] * 3 + $stats['draws'];
         }
-
-        // Sort teams by points
-        // uasort($teamStats, function ($a, $b) {
-        //     return $b['points'] - $a['points'];
-        // });
 
         // Get ranking
         uasort($teamStats, [$this->rankingService, 'getRanking']);
