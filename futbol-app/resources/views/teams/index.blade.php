@@ -18,63 +18,72 @@
             <thead class="text-xs text-white uppercase bg-gray-700">
                 <tr>
                     <th class="px-6 py-3">Logo</th>
-                    <th class="px-6 py-3">Nombre</th>
-                    <th class="px-6 py-3">Editar</th>
-                    <th class="px-6 py-3">Eliminar</th>
+                    <th class="px-6 py-3 min-w-40">Nombre</th>
+                    <th class="px-6 py-3 text-center">Editar</th>
+                    <th class="px-6 py-3 text-center">Eliminar</th>
 
                 </tr>
             </thead>
             <tbody>
                 @foreach ($teams as $team)
+                
                     <!-- Team logo-->
                     <tr class="odd:bg-gray-100 even:bg-gray-200 border-t border-gray-400">
-                        <td class="px-6 py-4"><img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
-                                style="width: 48px; height: 48px;">
+                        <td class="px-6 py-4">
+                            <div>
+                                <img src="{{ asset('logos/' . $team->logo) }}" alt="{{ $team->name }}"
+                                    style="width: 48px; height: 48px;">
+                            </div>
                         </td>
 
                         <!-- Team name-->
-                        <td class="px-6 py-4">{{ $team->name }}</td>
+                        <td class="px-6 py-4">
+                            <div>
+                                {{ $team->name }}
+                            </div>
+                        </td>
 
                         <!-- Edit button-->
                         <td class="px-6 py-4">
-                            <form action="{{ route('teams.edit', $team->id) }}" method="get">
-                                @csrf
-                                <button type="submit" class="hover:text-green-700 py-2 px-4">
+                            <div class="flex justify-center">
+                                <a href="{{ route('teams.edit', $team->id) }}">
                                     <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
-                                </button>
-                            </form>
-
+                                </a>
+                            </div>
                         </td>
+
                         <!-- Delete button-->
                         <td class="px-6 py-4">
-                            <form action="{{ route('teams.destroy', $team->id) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
-                                    onclick="return confirm('¿Eliminar {{ $team->name }}?')"
-                                    class="py-2 px-4 {{ $team->league->started ? 'text-gray-400 cursor-not-allowed' : 'hover:text-red-700' }}">
-                                    <i class="fa-solid fa-trash-can fa-xl"
-                                        title="{{ $team->league->started ? 'Liga iniciada. No se pueden eliminar equipos' : 'Eliminar' }}"></i>
-                                </button>
-                            </form>
+                            <div class="flex justify-center">
+                                <form action="{{ route('teams.destroy', $team->id) }}" method="post" class="mb-0">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
+                                        onclick="return confirm('¿Eliminar {{ $team->name }}?')"
+                                        class="py-2 px-4 {{ $team->league->started ? 'text-gray-400 cursor-not-allowed' : 'hover:text-red-700' }}">
+                                        <i class="fa-solid fa-trash-can fa-xl"
+                                            title="{{ $team->league->started ? 'Liga iniciada. No se pueden eliminar equipos' : 'Eliminar' }}"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
+
                     </tr>
                 @endforeach
 
             </tbody>
 
         </table>
+
     </div>
+
+    <!-- Create button -->
     <div class="flex justify-center">
         @if ($getLeagues->count() > 0)
-            <!-- Create button -->
-            <form action="{{ route('teams.create') }}" method="get">
-                @csrf
-                <button type="submit"
-                    class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 border rounded {{ $activeLeagueIsStarted ? 'hidden' : '' }}">
-                    Crear equipo
-                </button>
-            </form>
+            <a href="{{ route('teams.create') }}"
+                class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 border rounded {{ $activeLeagueIsStarted ? 'hidden' : '' }}">
+                Crear equipo
+            </a>
         @else
             <span
                 class="mt-4 p-0.5 mb-2 flex-none block mx-4 px-4 py-2.5 border-2 border-gray-700 rounded leading-none font-medium">
