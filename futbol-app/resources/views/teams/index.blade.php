@@ -46,7 +46,7 @@
                         <!-- Edit button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center">
-                                <a href="{{ route('teams.edit', $team->id) }}">
+                                <a href="{{ route('teams.edit', $team) }}">
                                     <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
                                 </a>
                             </div>
@@ -55,7 +55,7 @@
                         <!-- Delete button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center">
-                                <form action="{{ route('teams.destroy', $team->id) }}" method="post" class="mb-0">
+                                <form action="{{ route('teams.destroy', $team) }}" method="post" class="mb-0">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" {{ $team->league->started ? 'disabled' : '' }}

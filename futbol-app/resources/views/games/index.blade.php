@@ -74,7 +74,7 @@
                             <!-- Edit button -->
                             <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
                                 <div class="flex justify-center">
-                                    <a href="{{ route('games.edit', $game->id) }}">
+                                    <a href="{{ route('games.edit', $game) }}">
                                         <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
                                     </a>
                                 </div>
@@ -83,7 +83,7 @@
                             <!-- Delete button -->
                             <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
                                 <div class="flex justify-center">
-                                    <form action="{{ route('games.destroy', $game->id) }}" method="post"
+                                    <form action="{{ route('games.destroy', $game) }}" method="post"
                                         class="mb-0">
                                         @csrf
                                         @method('DELETE')
