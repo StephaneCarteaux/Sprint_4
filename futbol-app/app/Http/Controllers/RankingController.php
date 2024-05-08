@@ -84,11 +84,6 @@ class RankingController extends Controller
             $teamStats[$teamId]['points'] = $stats['games_won'] * 3 + $stats['draws'];
         }
 
-        // Sort teams by points
-        // uasort($teamStats, function ($a, $b) {
-        //     return $b['points'] - $a['points'];
-        // });
-
         // Get ranking
         uasort($teamStats, [$this->rankingService, 'getRanking']);
 

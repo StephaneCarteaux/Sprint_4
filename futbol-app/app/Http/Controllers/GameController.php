@@ -81,20 +81,19 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Game $game)
     {
         $teams = $this->teamService->getTeamsForActiveLeague();
-        return view('games.edit', ['game' => Game::findOrFail($id), 'teams' => $teams]);
+        return view('games.edit', ['game' => $game, 'teams' => $teams]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGameRequest $request, string $id)
+    public function update(UpdateGameRequest $request, Game $game)
     {
         $validated = $request->validated();
 
-        $game = Game::findOrFail($id);
         $game->update($validated);
 
         return redirect()->route('games.index');
@@ -103,9 +102,9 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Game $game)
     {
-        Game::destroy($id);
+        $game->delete();
         return redirect()->route('games.index');
     }
 }
