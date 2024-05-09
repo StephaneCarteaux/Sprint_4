@@ -23,12 +23,12 @@ class UpdateTeamRequest extends FormRequest
     public function rules(): array
     {
         $league_id = request()->get('league_id');
-        $teamId = request()->get('id');
 
         return [
             'name' => [
                 'required',
-                Rule::unique('teams')->ignore($teamId)->where(function ($query) use ($league_id) {
+                // Outer where() is part of Laravel's Rule class while inner where() is part of the Eloquent query builder 
+                Rule::unique('teams')->ignore($this->team)->where(function ($query) use ($league_id) {
                     return $query->where('league_id', $league_id);
                 })
             ],
