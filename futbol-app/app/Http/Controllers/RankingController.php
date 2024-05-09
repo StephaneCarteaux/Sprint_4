@@ -4,32 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\Team;
-use App\Services\RankingTeamStatsService;
-use App\Services\RankingSortingService;
+use App\Services\RankingService;
 
 class RankingController extends Controller
 {
-    protected $sorting;
-    protected $teamStats;
-
-    public function __construct(
-        RankingTeamStatsService $rankingTeamStatsService,
-        RankingSortingService $rankingSortingService
-    ) {
-        $this->teamStats = $rankingTeamStatsService;
-        $this->sorting = $rankingSortingService;
-    }
-
-    public function index()
+    public function index(RankingService $rankingService)
     {
         // Get all games
         $games = Game::all();
 
         // Get team stats
-        $teamStats = $this->teamStats->getTeamStats($games);
+        $teamStats = $rankingService->getTeamStats($games);
 
         // Get ranking
-        uasort($teamStats, [$this->sorting, 'getRanking']);
+        uasort($teamStats, [$rankingService, 'getRanking']);
 
         // Get complete information based on calculated statistics
         $teams = [];
