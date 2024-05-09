@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Utilities\LeagueUtility;
+use Illuminate\Database\Eloquent\Collection;
 
 class LeagueService
 {
-    public function activeLeagueIsStarted()
+    public function activeLeagueIsStarted(): bool
     {
         $activeLeague = LeagueUtility::getActiveLeague();
         $startedLeagues = LeagueUtility::getStartedLeagues();
@@ -17,7 +18,7 @@ class LeagueService
         return $activeLeagueIsStarted;
     }
 
-    public function getLeagues()
+    public function getLeagues(): Collection
     {
         $leagues = LeagueUtility::getLeagues();
         return $leagues;

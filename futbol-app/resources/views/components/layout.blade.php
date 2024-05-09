@@ -90,7 +90,7 @@
                     <div class="py-2" role="none">
 
                         @foreach ($allLeagues as $league)
-                            <form action="{{ route('leagues.dropdown', $league->id) }}" method="post">
+                            <form action="{{ route('leagues.dropdown', $league) }}" method="post">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" id="active" name="active" value="1">

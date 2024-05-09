@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateLeagueRequest extends FormRequest
+class StartLeagueRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class UpdateLeagueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // We use the sintaxis: 'field_name' => 'unique:table_name,column_to_validate,ignored_id'
-            'name' => 'required|unique:leagues,name,' . $this->league->id
+            'started' => 'required',
         ];
     }
 }
