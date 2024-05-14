@@ -97,11 +97,11 @@
 
                     <!-- Login -->
                     <x-nav-link :href="route('login')">
-                        {{ __('auth_login') }}
+                        {{ __('Log in') }}
                     </x-nav-link>
                     <!-- Register -->
                     <x-nav-link :href="route('register')">
-                        {{ __('auth_register') }}
+                        {{ __('Register') }}
                     </x-nav-link>
                 </nav>
             @endguest
@@ -130,7 +130,7 @@
                         <x-slot name="content">
                             <!-- Profile -->
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('auth_profile') }}
+                                {{ __('Profile') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
@@ -140,7 +140,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('auth_logout') }}
+                                    {{ __('Log out') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>

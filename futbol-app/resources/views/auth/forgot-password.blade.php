@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot:title>
-        {{ __('auth_reset_password') }}
+        {{ __('Reset Password') }}
     </x-slot>
 
     <!-- Session Status -->
@@ -11,7 +11,7 @@
             <span class="flex-grow block border-t border-gray-700"></span>
             <span
                 class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-                {{ __('auth_reset_password') }}
+                {{ __('Reset Password') }}
             </span>
             <span class="flex-grow block border-t border-gray-700"></span>
         </h2>
@@ -24,7 +24,7 @@
                 @csrf
 
                 <div class="mb-4 text-sm text-gray-600">
-                    {{ __('auth_forgot_message') }}
+                    {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
                 </div>
 
                 <!-- Email Address -->
@@ -37,7 +37,7 @@
 
                 <div class="flex items-center justify-end mt-4">
                     <x-primary-button>
-                        {{ __('auth_send_password_reset_link') }}
+                        {{ __('Email Password Reset Link') }}
                     </x-primary-button>
                 </div>
             </form>

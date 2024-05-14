@@ -3,13 +3,11 @@
         {{ __('game_title') }}
     </x-slot>
 
-    <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
-        <span class="flex-grow block border-t border-gray-700"></span>
-        <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-            {{ __('game_title') }} {{ $activeLeague ? $activeLeague->name : '' }}
-        </span>
-        <span class="flex-grow block border-t border-gray-700"></span>
-    </h2>
+    <x-header>
+        <x-slot:title>
+            {{ __('game_title') }}
+        </x-slot>
+    </x-header>
 
     <div
         class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16  {{ $groupedGames->count() ? '' : 'invisible' }}">
@@ -36,7 +34,7 @@
                         <!-- Game number -->
                         <td class="px-6 py-1 bg-gray-300" colspan="6">
                             <div>
-                                {{ __('matchweek') }} {{ $game_number }}
+                                {{ __('game_matchweek') }} {{ $game_number }}
                             </div>
                         </td>
                     </tr>

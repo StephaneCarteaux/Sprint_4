@@ -1,19 +1,16 @@
 <x-app-layout>
     <x-slot:title>
-        {{ __('auth_login') }}
+        {{ __('Log in') }}
     </x-slot>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <div>
-        <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
-            <span class="flex-grow block border-t border-gray-700"></span>
-            <span
-                class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-                {{ __('auth_login') }}
-            </span>
-            <span class="flex-grow block border-t border-gray-700"></span>
-        </h2>
+        <x-header>
+            <x-slot:title>
+                {{ __('Log in') }}
+            </x-slot>
+        </x-header>
 
         <div
             class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 mb-6 sm:w-full md:w-1/2 lg:w-1/2 xl:w-[600px] mx-auto">
@@ -22,15 +19,15 @@
 
                 <!-- Email Address -->
                 <div class="mb-5 px-3">
-                    <x-input-label for="email" :value="__('auth_email')" />
-                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
-                        :value="old('email')" required autofocus autocomplete="username" />
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                        required autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
                 <!-- Password -->
                 <div class="mb-5 px-3">
-                    <x-input-label for="password" :value="__('auth_password')" />
+                    <x-input-label for="password" :value="__('Password')" />
 
                     <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
                         autocomplete="current-password" />
@@ -44,7 +41,7 @@
                         <input id="remember_me" type="checkbox"
                             class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
                             name="remember">
-                        <span class="ms-2 text-sm text-gray-600">{{ __('auth_remember_me') }}</span>
+                        <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                     </label>
                 </div>
 
@@ -52,12 +49,12 @@
                     @if (Route::has('password.request'))
                         <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             href="{{ route('password.request') }}">
-                            {{ __('auth_forgot_your_password') }}
+                            {{ __('Forgot your password?') }}
                         </a>
                     @endif
 
                     <x-primary-button class="ms-3 my-5">
-                        {{ __('auth_login') }}
+                        {{ __('Log in') }}
                     </x-primary-button>
                 </div>
             </form>

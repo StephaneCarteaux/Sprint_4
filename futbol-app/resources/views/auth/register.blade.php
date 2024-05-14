@@ -1,16 +1,13 @@
 <x-app-layout>
     <x-slot:title>
-        {{ __('auth_register') }}
+        {{ __('Register') }}
     </x-slot>
     <div>
-        <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
-            <span class="flex-grow block border-t border-gray-700"></span>
-            <span
-                class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-                {{ __('auth_register') }}
-            </span>
-            <span class="flex-grow block border-t border-gray-700"></span>
-        </h2>
+        <x-header>
+            <x-slot:title>
+                {{ __('Register') }}
+            </x-slot>
+        </x-header>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 mb-6 sm:w-full md:w-1/2 lg:w-1/2 xl:w-[600px] mx-auto">
 
@@ -19,21 +16,21 @@
 
         <!-- Name -->
         <div class="mb-5 px-3">
-            <x-input-label for="name" :value="__('name')" />
+            <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
         <div class="mb-5 px-3">
-            <x-input-label for="email" :value="__('auth_email')" />
+            <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mb-5 px-3">
-            <x-input-label for="password" :value="__('auth_password')" />
+            <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -45,7 +42,7 @@
 
         <!-- Confirm Password -->
         <div class="mb-5 px-3">
-            <x-input-label for="password_confirmation" :value="__('auth_confirm_password')" />
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
@@ -56,11 +53,11 @@
 
         <div class="flex items-center justify-end mb-5 px-3">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('auth_already_registered') }}
+                {{ __('Already registered?') }}
             </a>
 
             <x-primary-button class="ms-4 my-5">
-                {{ __('auth_register') }}
+                {{ __('Register') }}
             </x-primary-button>
         </div>
     </form>
