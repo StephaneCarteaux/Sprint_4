@@ -151,5 +151,4 @@
             @endif
         </div>
     @endauth
-
 </x-app-layout>
