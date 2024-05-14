@@ -13,9 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(LeagueSeeder::class);
-        $this->call(TeamSeeder::class);
-        $this->call(GameSeeder::class);
-        
+        // User::factory(10)->create();
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+
+        $this->call([
+            LeagueSeeder::class,
+            TeamSeeder::class,
+            GameSeeder::class
+        ]);
     }
 }

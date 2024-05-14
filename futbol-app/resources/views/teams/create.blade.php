@@ -1,13 +1,13 @@
-<x-layout>
+<x-app-layout>
     <x-slot:title>
-        Crear equipo
+        {{ __('team_create') }}
     </x-slot>
     <div>
         <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
             <span class="flex-grow block border-t border-gray-700"></span>
             <span
                 class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-                Crear un nuevo equipo para: {{ $activeLeague->name }}
+                {{ __('team_create_new') }} {{ $activeLeague->name }}
             </span>
             <span class="flex-grow block border-t border-gray-700"></span>
         </h2>
@@ -25,28 +25,31 @@
 
                 <!-- Name -->
                 <div class="mb-5 px-3">
-                    <label for="name" class="block mb-1 text-sm font-medium">Name:</label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}"
-                        class="border border-gray-700 text-sm rounded-lg block w-full p-2">
+                    <x-input-label for="name" :value="__('name') . ': '" />
+                    <x-text-input id="name" name="name" value="{{ old('name') }}" autofocus class="w-full" />
+                        
                 </div>
                 
                 <!-- Logo -->
                 <div class="mb-5 px-3">
-                    <label for="logo" class="block mb-1 text-sm font-medium">Logo:</label>
+                    <x-input-label for="logo" :value="__('logo') . ': '" />
                     <input type="file" id="logo" name="logo"
-                        class="border border-gray-700 bg-white text-sm rounded-lg block w-full p-2">
+                        class="border border-gray-400 bg-white text-sm rounded-lg block w-full p-2 h-10">
                 </div>
 
                 <div class="flex justify-between mt-5 px-3">
                     <!-- Return button -->
-                    <a href="{{ route('teams.index') }}"
-                    class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">Volver</a>
+                    <x-secondary-button>
+                        <a href="{{ route('teams.index') }}">{{ __('back') }}</a>
+                    </x-secondary-button>
+                    
                     <!-- Send button -->
-                        <input type="submit" value="Enviar"
-                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-sky-800 text-white py-2 px-4 rounded">
+                    <x-primary-button class="ms-3">
+                        {{ __('send') }}
+                    </x-primary-button>
                 </div>
                 
             </form>
         </div>
     </div>
-</x-layout>
+</x-app-layout>

@@ -1,12 +1,12 @@
-<x-layout>
+<x-app-layout>
     <x-slot:title>
-        Equipos
+        {{ __('team_title') }}
     </x-slot>
 
     <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
         <span class="flex-grow block border-t border-gray-700"></span>
         <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-            Equipos {{ $activeLeague ? $activeLeague->name : '' }}
+            {{ __('team_title') }} {{ $activeLeague ? $activeLeague->name : '' }}
         </span>
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
@@ -18,15 +18,14 @@
             <thead class="text-xs text-white uppercase bg-gray-700">
                 <tr>
                     <th class="px-6 py-3">Logo</th>
-                    <th class="px-6 py-3 min-w-40">Nombre</th>
-                    <th class="px-6 py-3 text-center">Editar</th>
-                    <th class="px-6 py-3 text-center">Eliminar</th>
+                    <th class="px-6 py-3 min-w-40">{{ __('name') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('edit') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('delete') }}</th>
 
                 </tr>
             </thead>
             <tbody>
                 @foreach ($teams as $team)
-                
                     <!-- Team logo-->
                     <tr class="odd:bg-gray-100 even:bg-gray-200 border-t border-gray-400">
                         <td class="px-6 py-4">
@@ -47,7 +46,7 @@
                         <td class="px-6 py-4">
                             <div class="flex justify-center">
                                 <a href="{{ route('teams.edit', $team) }}">
-                                    <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
+                                    <i class="fa-solid fa-pen-to-square fa-xl" title="{{ __('edit') }}"></i>
                                 </a>
                             </div>
                         </td>
@@ -59,10 +58,10 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
-                                        onclick="return confirm('¿Eliminar {{ $team->name }}?')"
+                                        onclick="return confirm('{{ __('team_delete', ['team_name' => $team->name]) }}')"
                                         class="py-2 px-4 {{ $team->league->started ? 'text-gray-400 cursor-not-allowed' : 'hover:text-red-700' }}">
                                         <i class="fa-solid fa-trash-can fa-xl"
-                                            title="{{ $team->league->started ? 'Liga iniciada. No se pueden eliminar equipos' : 'Eliminar' }}"></i>
+                                            title="{{ $team->league->started ? __('league_started_cant_delete_team') : __('delete') }}"></i>
                                     </button>
                                 </form>
                             </div>
@@ -78,18 +77,18 @@
     </div>
 
     <!-- Create button -->
-    <div class="flex justify-center">
-        @if ($getLeagues->count() > 0)
-            <a href="{{ route('teams.create') }}"
-                class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 border rounded {{ $activeLeagueIsStarted ? 'hidden' : '' }}">
-                Crear equipo
-            </a>
-        @else
-            <span
-                class="mt-4 p-0.5 mb-2 flex-none block mx-4 px-4 py-2.5 border-2 border-gray-700 rounded leading-none font-medium">
-                Tienes que crear una liga para poder crear equipos
-            </span>
-        @endif
-
-    </div>
-</x-layout>
+    @auth
+        <div class="flex justify-center my-5">
+            @if ($getLeagues->count() > 0)
+                <x-secondary-button>
+                    <a href="{{ route('teams.create') }}">{{ __('team_create') }}</a>
+                </x-secondary-button>
+            @else
+                <span
+                    class="mx-4 mb-2 px-4 py-2.5 flex-none block border-2 border-gray-700 rounded leading-none font-medium">
+                    {{ __('team_create_disabled') }}
+                </span>
+            @endif
+        </div>
+    @endauth
+</x-app-layout>

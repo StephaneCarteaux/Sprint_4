@@ -1,12 +1,12 @@
-<x-layout>
+<x-app-layout>
     <x-slot:title>
-        Clasificación
+        {{ __('ranking_title') }}
     </x-slot>
 
     <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
         <span class="flex-grow block border-t border-gray-700"></span>
         <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-            Clasificación {{ $activeLeague ? $activeLeague->name : '' }}
+            {{ __('ranking_title') }} {{ $activeLeague ? $activeLeague->name : '' }}
         </span>
         <span class="flex-grow block border-t border-gray-700"></span>
     </h2>
@@ -20,14 +20,14 @@
                     <th class="px-6 py-3"></th>
                     <th class="px-6 py-3 min-w-20"></th>
                     <th class="px-6 py-3 min-w-40"></th>
-                    <th class="px-6 py-3 text-center">PJ</th>
-                    <th class="px-6 py-3 text-center">V</th>
-                    <th class="px-6 py-3 text-center">E</th>
-                    <th class="px-6 py-3 text-center">D</th>
-                    <th class="px-6 py-3 text-center">GF</th>
-                    <th class="px-6 py-3 text-center">GC</th>
-                    <th class="px-6 py-3 text-center">DG</th>
-                    <th class="px-6 py-3 text-center">PTS</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_played') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_won') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_drawn') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_lost') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_gf') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_ga') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_ga') }}</th>
+                    <th class="px-6 py-3 text-center">{{ __('ranking_points') }}</th>
 
                 </tr>
             </thead>
@@ -120,15 +120,15 @@
 
         </table>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center my-5">
         <!-- Create button -->
         @if (!$teams)
             <span
-                class="mt-4 p-0.5 mb-2 flex-none block mx-4 px-4 py-2.5 border-2 border-gray-700 rounded leading-none font-medium">
-                Aun no hay partidos
+            class="mx-4 mb-2 px-4 py-2.5 flex-none block border-2 border-gray-700 rounded leading-none font-medium">
+            {{ __('ranking_no_games') }}
             </span>
         @endif
 
     </div>
 
-</x-layout>
+</x-app-layout>
