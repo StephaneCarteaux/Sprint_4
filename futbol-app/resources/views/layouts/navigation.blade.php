@@ -3,6 +3,7 @@
     <!-- Primary Navigation Menu -->
     <div class="flex justify-between mx-auto p-6 bg-sky-800">
 
+        <!-- Left section -->
         <div class="flex">
 
             <!-- Logo and tilte -->
@@ -48,7 +49,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
-                            class="max-w-36 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md ring-1 ring-inset ring-white text-white focus:outline-none transition ease-in-out duration-150 whitespace-nowrap">
+                            class="max-w-36 overflow-hidden inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md ring-1 ring-inset ring-white text-white focus:outline-none transition ease-in-out duration-150">
                             <div class="truncate">{{ $activeLeague ? $activeLeague->name : 'Liga activa' }}</div>
 
                             <div class="ms-1">
@@ -91,6 +92,7 @@
 
         </div>
 
+        <!-- Right section -->
         <div class="flex">
             <!-- Unauthenticated -->
             @guest
