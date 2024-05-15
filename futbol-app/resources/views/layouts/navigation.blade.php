@@ -1,100 +1,100 @@
 <nav x-data="{ open: false }" class="bg-gray-50 border-b border-gray-200">
 
     <!-- Primary Navigation Menu -->
-    <div class="mx-auto p-6 bg-sky-800">
-        <div class="flex justify-between">
-            <div class="flex">
+    <div class="flex justify-between mx-auto p-6 bg-sky-800">
 
-                <!-- Logo and tilte -->
-                <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <div class="flex">
 
-                    <!-- Logo -->
-                    <x-application-logo />
+            <!-- Logo and tilte -->
+            <div class="flex items-center flex-shrink-0 text-white mr-6">
 
-                    <!-- Title  -->
-                    <span class="font-semibold text-xl tracking-tight">Super futbol league</span>
+                <!-- Logo -->
+                <x-application-logo />
 
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-2 sm:-my-px sm:ms-0 lg:flex">
-
-                    <!-- Games -->
-                    <x-nav-link :href="route('games.index')" :active="request()->routeIs('games*')">
-                        {{ __('nav_games') }}
-                    </x-nav-link>
-
-                    <!-- Ranking -->
-                    <x-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking*')">
-                        {{ __('nav_ranking') }}
-                    </x-nav-link>
-
-                    @auth
-                        <!-- Teams -->
-                        <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams*')">
-                            {{ __('nav_teams') }}
-                        </x-nav-link>
-
-                        <!-- Leagues -->
-                        <x-nav-link :href="route('leagues.index')" :active="request()->routeIs('leagues*')">
-                            {{ __('nav_manage_leagues') }}
-                        </x-nav-link>
-                    @endauth
-
-                </div>
-
-                <!-- League Dropdown -->
-                <div class="flex items-center lg:ml-4">
-                    <x-dropdown align="right" width="48">
-                        <x-slot name="trigger">
-                            <button
-                                class="max-w-40 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md ring-1 ring-inset ring-white text-white focus:outline-none transition ease-in-out duration-150 whitespace-nowrap">
-                                <div class="truncate">{{ $activeLeague ? $activeLeague->name : 'Liga activa' }}</div>
-
-                                <div class="ms-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </button>
-                        </x-slot>
-
-                        <!-- Content -->
-                        <x-slot name="content">
-                            @foreach ($allLeagues as $league)
-                                <form action="{{ route('leagues.dropdown', $league) }}" method="post">
-                                    @csrf
-                                    @method('PATCH')
-
-                                    <input type="hidden" id="active" name="active" value="1">
-
-                                    @if (!$league->active)
-                                        <x-dropdown-link :href="route('leagues.dropdown', $league)"
-                                            onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                                            {{ $league->name }}
-                                        </x-dropdown-link>
-                                    @elseif ($league->active)
-                                        <x-dropdown-link href="#" class="pointer-events-none"
-                                            onclick="event.preventDefault();">
-                                            {{ $league->name }}
-                                        </x-dropdown-link>
-                                    @endif
-                                </form>
-                            @endforeach
-                        </x-slot>
-                    </x-dropdown>
-                </div>
+                <!-- Title  -->
+                <span class="font-semibold text-xl tracking-tight">Super futbol league</span>
 
             </div>
 
+            <!-- Navigation Links -->
+            <div class="hidden space-x-2 sm:-my-px sm:ms-0 lg:flex">
+
+                <!-- Games -->
+                <x-nav-link :href="route('games.index')" :active="request()->routeIs('games*')">
+                    {{ __('nav_games') }}
+                </x-nav-link>
+
+                <!-- Ranking -->
+                <x-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking*')">
+                    {{ __('nav_ranking') }}
+                </x-nav-link>
+
+                @auth
+                    <!-- Teams -->
+                    <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams*')">
+                        {{ __('nav_teams') }}
+                    </x-nav-link>
+
+                    <!-- Leagues -->
+                    <x-nav-link :href="route('leagues.index')" :active="request()->routeIs('leagues*')">
+                        {{ __('nav_manage_leagues') }}
+                    </x-nav-link>
+                @endauth
+
+            </div>
+
+            <!-- League Dropdown -->
+            <div class="flex items-center lg:ml-4">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <button
+                            class="max-w-36 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md ring-1 ring-inset ring-white text-white focus:outline-none transition ease-in-out duration-150 whitespace-nowrap">
+                            <div class="truncate">{{ $activeLeague ? $activeLeague->name : 'Liga activa' }}</div>
+
+                            <div class="ms-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
+
+                    <!-- Content -->
+                    <x-slot name="content">
+                        @foreach ($allLeagues as $league)
+                            <form action="{{ route('leagues.dropdown', $league) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+
+                                <input type="hidden" id="active" name="active" value="1">
+
+                                @if (!$league->active)
+                                    <x-dropdown-link :href="route('leagues.dropdown', $league)"
+                                        onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                        {{ $league->name }}
+                                    </x-dropdown-link>
+                                @elseif ($league->active)
+                                    <x-dropdown-link href="#" class="pointer-events-none"
+                                        onclick="event.preventDefault();">
+                                        {{ $league->name }}
+                                    </x-dropdown-link>
+                                @endif
+                            </form>
+                        @endforeach
+                    </x-slot>
+                </x-dropdown>
+            </div>
+
+        </div>
+
+        <div class="flex">
             <!-- Unauthenticated -->
             @guest
-                <nav class="hidden -mx-3 lg:flex flex-1 justify-end">
-
+                <nav class="hidden -mx-3 lg:flex justify-end">
                     <!-- Login -->
                     <x-nav-link :href="route('login')">
                         {{ __('Log in') }}
@@ -108,11 +108,11 @@
 
             <!-- Authenticated -->
             @auth
-                <div class="hidden lg:flex md:items-center flex-1 justify-end sm:ms-6">
+                <div class="hidden lg:flex md:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="max-w-40 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md ring-1 ring-inset ring-white text-white focus:outline-none transition ease-in-out duration-150 whitespace-nowrap">
+                                class="max-w-36 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md ring-1 ring-inset ring-white text-white focus:outline-none transition ease-in-out duration-150 whitespace-nowrap">
                                 <div class="truncate">{{ Auth::user()->name }}</div>
 
                                 <div class="ms-1">
@@ -149,7 +149,7 @@
             @endauth
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center lg:hidden flex-1 justify-end">
+            <div class="-me-2 flex items-center lg:hidden justify-end">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -165,16 +165,18 @@
             <!-- Languages -->
             <div class="flex items-center ms-4">
 
-                <a href="{{ route('locale.change', ['locale' => 'es_ES']) }}" class="p-2 {{ app()->getLocale() == 'es_ES' ? 'pointer-events-none bg-gray-50/30 rounded' : ''}} ">
+                <a href="{{ route('locale.change', ['locale' => 'es_ES']) }}"
+                    class="p-2 {{ app()->getLocale() == 'es_ES' ? 'pointer-events-none bg-gray-50/30 rounded' : '' }} ">
                     <x-flag-es-ES />
                 </a>
-                
-                <a href="{{ route('locale.change', ['locale' => 'en_US']) }}" class="p-2 {{ app()->getLocale() == 'en_US' ? 'pointer-events-none bg-gray-50/30 rounded' : ''}} ">
+
+                <a href="{{ route('locale.change', ['locale' => 'en_US']) }}"
+                    class="p-2 {{ app()->getLocale() == 'en_US' ? 'pointer-events-none bg-gray-50/30 rounded' : '' }} ">
                     <x-flag-en-US />
                 </a>
             </div>
-
         </div>
+
     </div>
 
     <!-- Responsive Navigation Menu -->

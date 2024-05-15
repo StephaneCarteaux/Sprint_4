@@ -51,7 +51,7 @@
 
                         <!-- Delete button-->
                         <td class="px-6 py-4">
-                            <div class="flex justify-center">
+                            <div class="flex justify-center items-center">
                                 <button
                                     class="py-2 px-4 {{ $team->league->started ? 'text-gray-400 cursor-not-allowed' : 'hover:text-red-700' }}"
                                     x-data=""
@@ -65,33 +65,31 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="fixed flex justify-content-center align-items-center">
+
         <!-- Delete Team Confirmation Modal -->
-        <x-modal name="confirm-team-deletion" maxWidth="sm" focusable>
-            <form action="{{ route('teams.destroy', $team) }}" method="post" class="p-6">
-                @csrf
-                @method('delete')
-                <p class="mt-1 text-sm text-gray-600">
-                    {{ __('team_delete', ['team_name' => $team->name]) }}
-                </p>
+        <div class="fixed flex justify-content-center align-items-center">
+            <x-modal name="confirm-team-deletion" maxWidth="sm" focusable>
+                <form action="{{ route('teams.destroy', $team) }}" method="post" class="p-6">
+                    @csrf
+                    @method('delete')
+                    <p class="mt-1 text-sm text-gray-600">
+                        {{ __('team_delete', ['team_name' => $team->name]) }}
+                    </p>
 
-                <div class="mt-6 flex justify-end">
-                    <x-secondary-button x-on:click="$dispatch('close')">
-                        {{ __('Cancel') }}
-                    </x-secondary-button>
+                    <div class="mt-6 flex justify-end">
+                        <x-secondary-button x-on:click="$dispatch('close')">
+                            {{ __('Cancel') }}
+                        </x-secondary-button>
 
-                    <x-danger-button class="ms-3">
-                        {{ __('Accept') }}
-                    </x-danger-button>
-                </div>
-            </form>
-        </x-modal>
-
+                        <x-danger-button class="ms-3">
+                            {{ __('Accept') }}
+                        </x-danger-button>
+                    </div>
+                </form>
+            </x-modal>
         </div>
 
     </div>
-
-
 
     <!-- Create button -->
     @auth

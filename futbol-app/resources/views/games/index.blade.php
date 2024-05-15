@@ -86,15 +86,19 @@
                             @auth
                                 <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
                                     <div class="flex justify-center">
-                                        <form action="{{ route('games.destroy', $game) }}" method="post" class="mb-0">
+                                        <button class="py-2 px-4 hover:text-red-700" x-data=""
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-game-deletion')">
+                                            <i class="fa-solid fa-trash-can fa-xl" title="{{ __('delete') }}"></i>
+                                        </button>
+
+                                        {{-- <form action="{{ route('games.destroy', $game) }}" method="post" class="mb-0">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
-                                                onclick="return confirm('{{ __('game_delete') }}')"
+                                            <button type="submit" onclick="return confirm('{{ __('game_delete') }}')"
                                                 class="hover:text-red-700 py-2 px-4">
                                                 <i class="fa-solid fa-trash-can fa-xl" title="{{ __('delete') }}"></i>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </td>
                             @endauth
@@ -123,14 +127,34 @@
                                     {{ $game->team2_goals }}
                                 </div>
                             </td>
-
                         </tr>
                     @endforeach
                 @endforeach
-
             </tbody>
-
         </table>
+
+        <!-- Delete Game Confirmation Modal -->
+        <div class="fixed flex justify-content-center align-items-center">
+            <x-modal name="confirm-game-deletion" maxWidth="sm" focusable>
+                <form action="{{ route('games.destroy', $game) }}" method="post" class="p-6">
+                    @csrf
+                    @method('delete')
+                    <p class="mt-1 text-sm text-gray-600">
+                        {{ __('game_delete') }}
+                    </p>
+
+                    <div class="mt-6 flex justify-end">
+                        <x-secondary-button x-on:click="$dispatch('close')">
+                            {{ __('Cancel') }}
+                        </x-secondary-button>
+
+                        <x-danger-button class="ms-3">
+                            {{ __('Accept') }}
+                        </x-danger-button>
+                    </div>
+                </form>
+            </x-modal>
+        </div>
 
     </div>
 
