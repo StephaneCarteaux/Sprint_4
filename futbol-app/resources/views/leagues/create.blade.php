@@ -3,42 +3,45 @@
         Crear liga
     </x-slot>
     <div>
-        <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
-            <span class="flex-grow block border-t border-gray-700"></span>
-            <span
-                class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-                Crear nueva liga
-            </span>
-            <span class="flex-grow block border-t border-gray-700"></span>
-        </h2>
+        <x-header>
+            <x-slot:title>
+                {{ __('league_create') }}
+            </x-slot>
+        </x-header>
 
-        <!-- Errors template -->
-        <x-errors/>
-        
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 bg-gray-300 mt-16 mb-6 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
-            <form action="{{ route('leagues.store') }}" method="post" class="max-w-sm mx-auto mt-8 mb-8">
-                @csrf
-                <!-- Active -->
-                <input type="hidden" id="active" name="active" value="1">
-                <!-- Started -->
-                <input type="hidden" id="started" name="started" value="0">
+            <div class="py-8 px-24">
 
-                <!-- Name -->
-                <div class="mb-5 px-3">
-                    <label for="name" class="block mb-1 text-sm font-medium">Nombre:</label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}"
-                        class="border border-gray-700 text-sm rounded-lg block w-full p-2">
-                </div>
+                <form action="{{ route('leagues.store') }}" method="post">
+                    @csrf
+                    <!-- Active -->
+                    <input type="hidden" id="active" name="active" value="1">
+                    <!-- Started -->
+                    <input type="hidden" id="started" name="started" value="0">
 
-                <div class="flex justify-between mt-5 px-3">
-                    <!-- Return button -->
-                    <a href="{{ route('leagues.index') }}"
-                        class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 rounded">Volver</a>
-                    <!-- Send button -->
-                    <input type="submit" value="Enviar"
-                        class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 rounded">
-                </div>
-            </form>
+                    <!-- Name -->
+                    <div>
+                        <x-input-label for="name" :value="__('Name')" />
+                        <x-text-input id="name" name="name" value="{{ old('name') }}" autofocus
+                            class="w-full" />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+
+                    <div class="flex justify-center mt-5 space-x-6">
+                        <!-- Return button -->
+                        <x-secondary-button>
+                            <a href="{{ route('leagues.index') }}">{{ __('back') }}</a>
+                        </x-secondary-button>
+
+                        <!-- Send button -->
+                        <x-primary-button>
+                            {{ __('send') }}
+                        </x-primary-button>
+                    </div>
+                </form>
+
+            </div>
         </div>
+
     </div>
 </x-layout>
