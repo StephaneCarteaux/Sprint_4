@@ -302,7 +302,7 @@
     "team_create_disabled": "Tienes que crear una liga para poder crear equipos",
     "team_create_new": "Crear un nuevo equipo para: ",
     "team_edit": "Editar equipo",
-    "team_delete": "¿Eliminar este equipo?\\nEsta acción no se puede deshacer.",
+    "team_delete": "¿Estas seguro de quere eliminar este equipo? Esta acción no se puede deshacer.",
     "team_title": "Equipos"
 
 }

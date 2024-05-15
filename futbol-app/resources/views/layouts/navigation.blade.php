@@ -215,12 +215,12 @@
             <div class="pt-4 pb-1 border-t border-gray-200">
                 <!-- Login -->
                 <x-responsive-nav-link :href="route('login')">
-                    {{ __('auth_login') }}
+                    {{ __('Log in') }}
                 </x-responsive-nav-link>
 
                 <!-- Register -->
                 <x-responsive-nav-link :href="route('register')">
-                    {{ __('auth_register') }}
+                    {{ __('Register') }}
                 </x-responsive-nav-link>
             </div>
         @endguest
@@ -234,7 +234,7 @@
 
                     <!-- Profile -->
                     <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('auth_profile') }}
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
@@ -244,7 +244,7 @@
                         <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                            {{ __('auth_logout') }}
+                            {{ __('Log out') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>

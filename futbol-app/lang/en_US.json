@@ -302,6 +302,6 @@
     "team_create_disabled": "You need to create a league to be able to create teams",
     "team_create_new": "Create a new team for: ",
     "team_edit": "Edit team",
-    "team_delete": "Delete this team?\\nThis action cannot be undone.",
+    "team_delete": "Are you sure you want to delete this team? This action cannot be undone.",
     "team_title": "Teams"
 }

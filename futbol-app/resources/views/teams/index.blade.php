@@ -52,27 +52,46 @@
                         <!-- Delete button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center">
-                                <form action="{{ route('teams.destroy', $team) }}" method="post" class="mb-0">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" {{ $team->league->started ? 'disabled' : '' }}
-                                        onclick="return confirm('{{ __('team_delete', ['team_name' => $team->name]) }}')"
-                                        class="py-2 px-4 {{ $team->league->started ? 'text-gray-400 cursor-not-allowed' : 'hover:text-red-700' }}">
-                                        <i class="fa-solid fa-trash-can fa-xl"
-                                            title="{{ $team->league->started ? __('league_started_cant_delete_team') : __('delete') }}"></i>
-                                    </button>
-                                </form>
+                                <button
+                                    class="py-2 px-4 {{ $team->league->started ? 'text-gray-400 cursor-not-allowed' : 'hover:text-red-700' }}"
+                                    x-data=""
+                                    x-on:click.prevent="$dispatch('open-modal', 'confirm-team-deletion')">
+                                    <i class="fa-solid fa-trash-can fa-xl"
+                                        title="{{ $team->league->started ? __('league_started_cant_delete_team') : __('delete') }}"></i>
+                                </button>
                             </div>
                         </td>
-
                     </tr>
                 @endforeach
-
             </tbody>
-
         </table>
+        <div class="fixed flex justify-content-center align-items-center">
+        <!-- Delete Team Confirmation Modal -->
+        <x-modal name="confirm-team-deletion" maxWidth="sm" focusable>
+            <form action="{{ route('teams.destroy', $team) }}" method="post" class="p-6">
+                @csrf
+                @method('delete')
+                <p class="mt-1 text-sm text-gray-600">
+                    {{ __('team_delete', ['team_name' => $team->name]) }}
+                </p>
+
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="$dispatch('close')">
+                        {{ __('Cancel') }}
+                    </x-secondary-button>
+
+                    <x-danger-button class="ms-3">
+                        {{ __('Accept') }}
+                    </x-danger-button>
+                </div>
+            </form>
+        </x-modal>
+
+        </div>
 
     </div>
+
+
 
     <!-- Create button -->
     @auth
