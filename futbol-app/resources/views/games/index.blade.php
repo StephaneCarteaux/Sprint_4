@@ -1,15 +1,13 @@
-<x-layout>
+<x-app-layout>
     <x-slot:title>
-        Partidos
+        {{ __('game_title') }}
     </x-slot>
 
-    <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
-        <span class="flex-grow block border-t border-gray-700"></span>
-        <span class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-700 text-white">
-            Partidos {{ $activeLeague ? $activeLeague->name : '' }}
-        </span>
-        <span class="flex-grow block border-t border-gray-700"></span>
-    </h2>
+    <x-header>
+        <x-slot:title>
+            {{ __('game_title') }}
+        </x-slot>
+    </x-header>
 
     <div
         class="relative overflow-x-auto shadow-md sm:rounded-lg border-2 border-gray-700 mt-16  {{ $groupedGames->count() ? '' : 'invisible' }}">
@@ -21,8 +19,10 @@
                     <th class="px-6 py-3 min-w-40"></th>
                     <th class="px-6 py-3"></th>
                     <th class="px-6 py-3 min-w-40"></th>
-                    <th class="px-6 py-3 text-center">Editar</th>
-                    <th class="px-6 py-3 text-center">Eliminar</th>
+                    @auth
+                        <th class="px-6 py-3 text-center">{{ __('edit') }}</th>
+                        <th class="px-6 py-3 text-center">{{ __('delete') }}</th>
+                    @endauth
 
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                         <!-- Game number -->
                         <td class="px-6 py-1 bg-gray-300" colspan="6">
                             <div>
-                                Jornada {{ $game_number }}
+                                {{ __('game_matchweek') }} {{ $game_number }}
                             </div>
                         </td>
                     </tr>
@@ -72,29 +72,36 @@
                             </td>
 
                             <!-- Edit button -->
-                            <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
-                                <div class="flex justify-center">
-                                    <a href="{{ route('games.edit', $game) }}">
-                                        <i class="fa-solid fa-pen-to-square fa-xl" title="Editar"></i>
-                                    </a>
-                                </div>
-                            </td>
+                            @auth
+                                <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
+                                    <div class="flex justify-center">
+                                        <a href="{{ route('games.edit', $game) }}">
+                                            <i class="fa-solid fa-pen-to-square fa-xl" title="{{ __('edit') }}"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            @endauth
 
                             <!-- Delete button -->
-                            <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
-                                <div class="flex justify-center">
-                                    <form action="{{ route('games.destroy', $game) }}" method="post"
-                                        class="mb-0">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            onclick="return confirm('¿Eliminar ese partido?\nEsta acción no se puede deshacer.')"
-                                            class="hover:text-red-700 py-2 px-4">
-                                            <i class="fa-solid fa-trash-can fa-xl" title="Eliminar"></i>
+                            @auth
+                                <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
+                                    <div class="flex justify-center">
+                                        <button class="py-2 px-4 hover:text-red-700" x-data=""
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-game-deletion')">
+                                            <i class="fa-solid fa-trash-can fa-xl" title="{{ __('delete') }}"></i>
                                         </button>
-                                    </form>
-                                </div>
-                            </td>
+
+                                        {{-- <form action="{{ route('games.destroy', $game) }}" method="post" class="mb-0">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('{{ __('game_delete') }}')"
+                                                class="hover:text-red-700 py-2 px-4">
+                                                <i class="fa-solid fa-trash-can fa-xl" title="{{ __('delete') }}"></i>
+                                            </button>
+                                        </form> --}}
+                                    </div>
+                                </td>
+                            @endauth
                         </tr>
 
                         <tr class="{{ $loop->odd ? 'bg-gray-100' : 'bg-gray-200' }}">
@@ -120,31 +127,50 @@
                                     {{ $game->team2_goals }}
                                 </div>
                             </td>
-
                         </tr>
-
                     @endforeach
                 @endforeach
-
             </tbody>
-
         </table>
 
+        <!-- Delete Game Confirmation Modal -->
+        <div class="fixed flex justify-content-center align-items-center">
+            <x-modal name="confirm-game-deletion" maxWidth="sm" focusable>
+                <form action="{{ route('games.destroy', $game) }}" method="post" class="p-6">
+                    @csrf
+                    @method('delete')
+                    <p class="mt-1 text-sm text-gray-600">
+                        {{ __('game_delete') }}
+                    </p>
+
+                    <div class="mt-6 flex justify-end">
+                        <x-secondary-button x-on:click="$dispatch('close')">
+                            {{ __('Cancel') }}
+                        </x-secondary-button>
+
+                        <x-danger-button class="ms-3">
+                            {{ __('Accept') }}
+                        </x-danger-button>
+                    </div>
+                </form>
+            </x-modal>
+        </div>
+
     </div>
 
-     <!-- Create button -->
-    <div class="flex justify-center">
-        @if ($activeLeagueIsStarted)
-            <a href="{{ route('games.create') }}"
-                class="mt-4 p-0.5 mb-2 bg-gray-700 hover:bg-sky-800 text-white py-2 px-4 rounded">
-                Crear partido
-            </a>
-        @else
-            <span
-                class="mt-4 p-0.5 mb-2 flex-none block mx-4 px-4 py-2.5 border-2 border-gray-700 rounded leading-none font-medium">
-                Tienes que iniciar la liga para poder crear partidos
-            </span>
-        @endif
-
-    </div>
-</x-layout>
+    <!-- Create button -->
+    @auth
+        <div class="flex justify-center my-5">
+            @if ($activeLeagueIsStarted)
+                <x-secondary-button>
+                    <a href="{{ route('games.create') }}">{{ __('game_create') }}</a>
+                </x-secondary-button>
+            @else
+                <span
+                    class="mx-4 mb-2 px-4 py-2.5 flex-none block border-2 border-gray-700 rounded leading-none font-medium">
+                    {{ __('game_create_disabled') }}
+                </span>
+            @endif
+        </div>
+    @endauth
+</x-app-layout>
