@@ -16,14 +16,18 @@ use App\Http\Controllers\LocaleController;
 // returns the home page with all posts
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
     // league
     Route::resource('/leagues', LeagueController::class);
     Route::patch('/leagues/{league}/activate', [LeagueController::class, 'activate'])->name('leagues.activate');
@@ -41,9 +45,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::resource('/ranking', RankingController::class);
-
 Route::patch('/leagues/{league}/dropdown', [LeagueController::class, 'dropdown'])->name('leagues.dropdown');
-
 Route::get('/locale', LocaleController::class)->name('locale.change');
 
 require __DIR__.'/auth.php';
