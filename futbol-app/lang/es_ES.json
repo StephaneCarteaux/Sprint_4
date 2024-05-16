@@ -264,7 +264,7 @@
     "game_create": "Crear partido",
     "game_create_disabled": "Tienes que iniciar la liga para poder crear partidos",
     "game_create_new": "Crear nuevo partido para",
-    "game_delete": "¿Eliminar ese partido? Esta acción no se puede deshacer.",
+    "game_delete": "¿Estas seguro de querer eliminar ese partido? Esta acción no se puede deshacer.",
     "game_edit": "Editar partido",
     "game_goals": "Goles",
     "game_matchweek": "Jornada",
@@ -276,7 +276,7 @@
     "league_activated": "Liga activada",
     "league_create": "Crear liga",
     "league_create_new": "Crear nueva liga",
-    "league_delete": "¿Eliminar esta liga sus equipos y partidos? Esta acción no se puede deshacer.",
+    "league_delete": "¿Estas seguro de querer eliminar la liga :league_name? Los equipos y partidos de esa liga también serán eliminados. Esta acción no se puede deshacer.",
     "league_edit": "Editar liga",
     "league_start": "Iniciar liga",
     "league_start_confirm": "¿Iniciar liga :league_name?",
@@ -304,7 +304,7 @@
     "team_create_disabled": "Tienes que crear una liga para poder crear equipos",
     "team_create_new": "Crear un nuevo equipo para: ",
     "team_edit": "Editar equipo",
-    "team_delete": "¿Estas seguro de quere eliminar este equipo? Esta acción no se puede deshacer.",
+    "team_delete": "¿Estas seguro de querer eliminar :team_name? Esta acción no se puede deshacer.",
     "team_title": "Equipos"
 
 }
