@@ -8,17 +8,10 @@ use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\RankingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LocaleController;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+require __DIR__.'/auth.php';
 
 // returns the home page with all posts
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -48,4 +41,6 @@ Route::resource('/ranking', RankingController::class);
 Route::patch('/leagues/{league}/dropdown', [LeagueController::class, 'dropdown'])->name('leagues.dropdown');
 Route::get('/locale', LocaleController::class)->name('locale.change');
 
-require __DIR__.'/auth.php';
+Route::fallback(function () {
+    return view('errors.404');
+});
