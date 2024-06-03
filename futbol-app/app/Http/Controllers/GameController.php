@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Services\TeamService;
+use App\Services\LeagueService;
 use Illuminate\Support\Collection;
+use App\Http\Requests\StoreGameRequest;
+use App\Http\Requests\UpdateGameRequest;
 
 class GameController extends Controller
 {
     protected $teamService;
+    protected $leagueService;
 
-    public function __construct(TeamService $teamService)
+    public function __construct(TeamService $teamService, LeagueService $leagueService)
     {
         $this->teamService = $teamService;
+        $this->leagueService = $leagueService;
     }
 
     /**
@@ -21,16 +25,21 @@ class GameController extends Controller
      */
     public function index()
     {
-        // Get all games
-        $games = Game::orderBy('game_number', 'asc')
-            ->orderBy('date', 'asc')
+        // Eager load all games
+        $games = Game::with('team1', 'team2')
+            ->orderBy('game_number', 'asc')
+            ->orderBy('date', 'asc', 'id')
             ->get();
 
         // Group games by game number.
         $groupedGames = $this->groupGamesByGameNumber($games);
+        $activeLeagueIsStarted = $this->leagueService->activeLeagueIsStarted();
 
         // Send grouped games to view.
-        return view('games.index', ['groupedGames' => $groupedGames]);
+        return view('games.index', [
+            'groupedGames' => $groupedGames,
+            'activeLeagueIsStarted' => $activeLeagueIsStarted
+        ]);
     }
 
     /**
@@ -44,7 +53,7 @@ class GameController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() 
+    public function create()
     {
         $teams = $this->teamService->getTeamsForActiveLeague();
         return view('games.create', ['teams' => $teams]);
@@ -53,27 +62,10 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGameRequest $request)
     {
-        $request->validate([    
-            'league_id' => 'required',
-            'game_number' => 'required|integer',
-            'date' => 'required|date',
-            'team1_id' => 'required',
-            'team2_id' => 'required',
-            'team1_goals' => 'required|integer',
-            'team2_goals' => 'required|integer'
-        ]);
-
-        Game::create([
-            'league_id' => $request->league_id,
-            'game_number' => $request->game_number,
-            'date' => $request->date,
-            'team1_id' => $request->team1_id,
-            'team2_id' => $request->team2_id,
-            'team1_goals' => $request->team1_goals,
-            'team2_goals' => $request->team2_goals
-        ]);
+        $validated = $request->validated();
+        Game::create($validated);
 
         return redirect()->route('games.index');
     }
@@ -89,34 +81,20 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Game $game)
     {
         $teams = $this->teamService->getTeamsForActiveLeague();
-        return view('games.edit', ['game' => Game::findOrFail($id), 'teams' => $teams]);
+        return view('games.edit', ['game' => $game, 'teams' => $teams]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGameRequest $request, Game $game)
     {
-        $request->validate([    
-            'game_number' => 'required|integer',
-            'date' => 'required|date',
-            'team1_id' => 'required',
-            'team2_id' => 'required',
-            'team1_goals' => 'required|integer',
-            'team2_goals' => 'required|integer'
-        ]);
+        $validated = $request->validated();
 
-        $game = Game::findOrFail($id);
-        $game->game_number = $request->game_number;
-        $game->date = $request->date;
-        $game->team1_id = $request->team1_id;
-        $game->team2_id = $request->team2_id;
-        $game->team1_goals = $request->team1_goals;
-        $game->team2_goals = $request->team2_goals;
-        $game->save();
+        $game->update($validated);
 
         return redirect()->route('games.index');
     }
@@ -124,9 +102,9 @@ class GameController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Game $game)
     {
-        Game::destroy($id);
+        $game->delete();
         return redirect()->route('games.index');
     }
 }

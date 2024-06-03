@@ -1,41 +1,46 @@
-<x-layout>
+<x-app-layout>
     <x-slot:title>
-        Editar liga
+        {{ __('league_edit') }}
     </x-slot>
+
     <div>
-        <h2 class="flex flex-row flex-nowrap items-center mt-16 uppercase">
-            <span class="flex-grow block border-t border-gray-700"></span>
-            <span
-                class="flex-none block mx-4 px-4 py-2.5 text-xl rounded leading-none font-medium bg-gray-900 text-white">
-                Editar liga
-            </span>
-            <span class="flex-grow block border-t border-gray-700"></span>
-        </h2>
+        <x-header>
+            <x-slot:title>
+                {{ __('league_edit') }}
+            </x-slot>
+        </x-header>
 
-        <!-- Errors template -->
-        <x-errors/>
-
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg  bg-gray-700 mt-16 sm:w-full md:w-1/2 lg:w-1/3 xl:w-[600px] mx-auto">
-            <form action="{{ route('leagues.update', $league->id) }} " method="post" class="max-w-sm mx-auto mt-8 mb-8">
+        <x-form-container>
+            <form action="{{ route('leagues.update', $league) }} " method="post">
                 @csrf
                 @method('PATCH')
 
-                <!-- Name -->
-                <div class="mb-5 px-3">
-                    <label for="name" class="block mb-1 text-sm font-medium text-white">Nombre:</label>
-                    <input type="text" id="name" name="name"
-                        class="text-sm rounded-lg block w-full p-2 bg-gray-900 text-white" value="{{ $league->name }}">
+                <!-- Input fields container -->
+                <div class="flex-col space-y-2">
+
+                    <!-- Name -->
+                    <div class="mb-5 px-3">
+                        <x-input-label for="name" :value="__('Name')" />
+                        <x-text-input id="name" name="name" value="{{ $league->name }}" autofocus class="w-full" />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
+
                 </div>
 
-                <div class="flex justify-between mt-5 px-3">
+                <!-- Buttons container -->
+                <div class="flex justify-center mt-6 space-x-6">
+
                     <!-- Return button -->
-                    <a href="{{ route('leagues.index') }}"
-                    class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 rounded">Volver</a>
+                    <x-secondary-button>
+                        <a href="{{ route('leagues.index') }}">{{ __('back') }}</a>
+                    </x-secondary-button>
+
                     <!-- Send button -->
-                        <input type="submit" value="Enviar"
-                        class="mt-4 p-0.5 mb-2 bg-gray-900 hover:bg-teal-500 text-white py-2 px-4 rounded">
+                    <x-primary-button class="ms-3">
+                        {{ __('send') }}
+                    </x-primary-button>
                 </div>
             </form>
-        </div>
+        </x-form-container>
     </div>
-</x-layout>
+</x-app-layout>
