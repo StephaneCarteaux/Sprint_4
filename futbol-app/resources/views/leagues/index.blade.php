@@ -82,42 +82,20 @@
                         <!-- Delete button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center items-center">
-                                <button
-                                    class="py-2 px-4 hover:text-red-700"
-                                    x-data=""
-                                    x-on:click.prevent="$dispatch('open-modal', 'confirm-league-deletion')">
-                                    <i class="fa-solid fa-trash-can fa-xl"
-                                        title="{{ __('delete') }}"></i>
+                                <button class="py-2 px-4 hover:text-red-700" x-data=""
+                                    x-on:click.prevent="$dispatch('open-modal', 'confirm-league-deletion-{{ $league->id }}')">
+                                    <i class="fa-solid fa-trash-can fa-xl" title="{{ __('delete') }}"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
+                    <!-- Delete League Confirmation Modal -->
+                        <x-confirm-modal name="confirm-league-deletion-{{ $league->id }}"
+                            action="{{ route('leagues.destroy', $league) }}"
+                            message="{{ __('league_delete', ['league_name' => $league->name]) }}" />
                 @endforeach
             </tbody>
         </table>
-
-        <!-- Delete League Confirmation Modal -->
-        <div class="fixed flex justify-content-center align-items-center">
-            <x-modal name="confirm-league-deletion" maxWidth="sm" focusable>
-                <form action="{{ route('leagues.destroy', $league) }}" method="post" class="p-6">
-                    @csrf
-                    @method('delete')
-                    <p class="mt-1 text-sm text-gray-600">
-                        {{ __('league_delete', ['league_name' => $league->name]) }}
-                    </p>
-
-                    <div class="mt-6 flex justify-end">
-                        <x-secondary-button x-on:click="$dispatch('close')">
-                            {{ __('Cancel') }}
-                        </x-secondary-button>
-
-                        <x-danger-button class="ms-3">
-                            {{ __('Accept') }}
-                        </x-danger-button>
-                    </div>
-                </form>
-            </x-modal>
-        </div>
 
     </div>
 

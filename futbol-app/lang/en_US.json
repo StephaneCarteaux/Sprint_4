@@ -264,7 +264,7 @@
     "game_create": "Create game",
     "game_create_disabled": "You need to start the league to be able to create games",
     "game_create_new": "Create new game for",
-    "game_delete": "Delete this game ? This action cannot be undone.",
+    "game_delete": "Are you sure you want to delete this game ? This action cannot be undone.",
     "game_edit": "Edit game",
     "game_goals": "Goals",
     "game_matchweek": "Matchweek",
@@ -276,7 +276,7 @@
     "league_activated": "League activated",
     "league_create": "Create league",
     "league_create_new": "Create new league",
-    "league_delete": "Delete this league and its teams and games ? This action cannot be undone.",
+    "league_delete": "Are you sure you want to delete the league :league_name ? All the teams and games in this league will be deleted too. This action cannot be undone.",
     "league_edit": "Edit league",
     "league_start": "Start league",
     "league_start_confirm": "Start league :league_name?",
@@ -304,6 +304,6 @@
     "team_create_disabled": "You need to create a league to be able to create teams",
     "team_create_new": "Create a new team for: ",
     "team_edit": "Edit team",
-    "team_delete": "Are you sure you want to delete this team? This action cannot be undone.",
+    "team_delete": "Are you sure you want to delete :team_name ?\nThis action cannot be undone.",
     "team_title": "Teams"
 }
