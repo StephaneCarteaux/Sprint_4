@@ -43,6 +43,6 @@ class RankingController extends Controller
             $rankingPosition++;
         }
 
-        return view('rankings.index', ['teams' => $teams]);
+        return view('ranking.index', ['teams' => $teams]);
     }
 }
