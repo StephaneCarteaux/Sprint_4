@@ -4,7 +4,8 @@
 
 <div class="fixed flex justify-content-center align-items-center">
     <x-modal name="{{ $name }}" maxWidth="sm">
-        <form action="{{ $action }}" method="post" class="p-6">
+        <div class="p-6">
+        <form action="{{ $action }}" method="post">
             @csrf
             @method('delete')
             <p class="mt-1 text-sm text-gray-600">
@@ -21,5 +22,6 @@
                 </x-danger-button>
             </div>
         </form>
+        </div>
     </x-modal>
 </div>
