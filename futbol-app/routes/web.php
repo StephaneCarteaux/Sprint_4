@@ -22,11 +22,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // league
-    Route::resource('/leagues', LeagueController::class);
+    Route::resource('/leagues', LeagueController::class, ['except' => ['show']]);
     Route::patch('/leagues/{league}/activate', [LeagueController::class, 'activate'])->name('leagues.activate');
     Route::patch('/leagues/{league}/start', [LeagueController::class, 'start'])->name('leagues.start');
     // team
-    Route::resource('/teams', TeamController::class);
+    Route::resource('/teams', TeamController::class, ['except' => ['show']]);
     // game
     Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
     Route::post('/games/store', [GameController::class, 'store'])->name('games.store');
@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
-Route::resource('/ranking', RankingController::class);
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
 Route::patch('/leagues/{league}/dropdown', [LeagueController::class, 'dropdown'])->name('leagues.dropdown');
 Route::get('/locale', LocaleController::class)->name('locale.change');
 
