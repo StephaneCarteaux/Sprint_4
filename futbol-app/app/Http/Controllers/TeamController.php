@@ -59,14 +59,6 @@ class TeamController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Team $team)
@@ -99,6 +91,10 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
+        if($team->league->started) {
+            return redirect()->route('teams.index')->with('error', __('league_started_cant_delete_team'));
+        }
+        
         $logo = $team->logo;
         Storage::disk('logos')->delete($logo);
         $team->delete();

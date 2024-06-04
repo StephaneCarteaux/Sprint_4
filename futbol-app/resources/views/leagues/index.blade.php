@@ -82,27 +82,20 @@
                         <!-- Delete button-->
                         <td class="px-6 py-4">
                             <div class="flex justify-center items-center">
-                                <button
-                                    class="py-2 px-4 hover:text-red-700"
-                                    x-data=""
-                                    x-on:click.prevent="$dispatch('open-modal', 'confirm-league-deletion')">
-                                    <i class="fa-solid fa-trash-can fa-xl"
-                                        title="{{ __('delete') }}"></i>
+                                <button class="py-2 px-4 hover:text-red-700" x-data=""
+                                    x-on:click.prevent="$dispatch('open-modal', 'confirm-league-deletion-{{ $league->id }}')">
+                                    <i class="fa-solid fa-trash-can fa-xl" title="{{ __('delete') }}"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
+                    <!-- Delete League Confirmation Modal -->
+                        <x-confirm-modal name="confirm-league-deletion-{{ $league->id }}"
+                            action="{{ route('leagues.destroy', $league) }}"
+                            message="{{ __('league_delete', ['league_name' => $league->name]) }}" />
                 @endforeach
             </tbody>
         </table>
-
-        <!-- Delete League Confirmation Modal -->
-        @isset($league)
-        <x-confirm-modal
-            name="confirm-league-deletion"
-            action="{{ route('leagues.destroy', $league) }}"
-            message="{{ __('league_delete', ['league_name' => $league->name]) }}" />
-        @endisset
 
     </div>
 
