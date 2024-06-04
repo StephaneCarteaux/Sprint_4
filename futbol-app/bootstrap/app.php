@@ -11,10 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->web(append:[
+            \App\Http\Middleware\LocaleMiddleware::class,
+        ]);
     })
+    ->withEvents(discover: [
+        __DIR__.'/../app/Domain/Listeners',
+    ])
     ->withExceptions(function (Exceptions $exceptions) {
-        // $exceptions->renderable(function (\Exception $e) {
-        //     return back()->withInput();
-        // });
+        //
     })->create();

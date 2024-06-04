@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Schema;
 use App\Models\League;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,14 +23,17 @@ class AppServiceProvider extends ServiceProvider
 
     {
         // We prevent lazy loading in production
-        Model::preventLazyLoading(! app()->isProduction());
+        Model::preventLazyLoading(!app()->isProduction());
 
         // We evaluate this condition first as accessing the league table may fail
         // when the database is not yet ready (before migration for example)
-        if (Schema::hasTable('leagues')) {
+
+        try {
             // We make all leagues and active league available in all views
             view()->share('allLeagues', League::all());
             view()->share('activeLeague', League::where('active', 1)->first());
+        } catch (\Exception $e) {
+            // Do nothing
         }
     }
 }

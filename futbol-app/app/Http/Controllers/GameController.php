@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Services\TeamService;
 use App\Services\LeagueService;
+use App\Services\GameService;
 use Illuminate\Support\Collection;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
@@ -23,22 +24,16 @@ class GameController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(GameService $gameService)
     {
-        // Eager load all games
-        $games = Game::with('team1', 'team2')
-            ->orderBy('game_number', 'asc')
-            ->orderBy('date', 'asc', 'id')
-            ->get();
-
-        // Group games by game number.
-        $groupedGames = $this->groupGamesByGameNumber($games);
+        // Get grouped games and active league status
+        $groupedGames = $gameService->getGroupedGames();
         $activeLeagueIsStarted = $this->leagueService->activeLeagueIsStarted();
 
-        // Send grouped games to view.
+        // Send grouped games to view
         return view('games.index', [
             'groupedGames' => $groupedGames,
-            'activeLeagueIsStarted' => $activeLeagueIsStarted
+            'activeLeagueIsStarted' => $activeLeagueIsStarted,
         ]);
     }
 
@@ -104,6 +99,7 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
+        echo $game->id;
         $game->delete();
         return redirect()->route('games.index');
     }
