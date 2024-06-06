@@ -45,7 +45,7 @@
             </div>
 
             <!-- League Dropdown -->
-            <div class="flex items-center lg:ml-4">
+            <div class="hidden lg:flex items-center lg:ml-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
