@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/leaguesDropdown.js',
+                'resources/js/mobileMenu.js',
             ],
             refresh: true,
         }),

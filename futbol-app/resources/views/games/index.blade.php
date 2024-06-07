@@ -86,9 +86,12 @@
                             @auth
                                 <td class="border-t border-gray-400 px-6 py-4" rowspan="2">
                                     <div class="flex justify-center">
-                                        <button class="py-2 px-4 hover:text-red-700" x-data=""
-                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-game-deletion')">
-                                            <i class="fa-solid fa-trash-can fa-xl" title="{{ __('delete') }}"></i>
+                                        <button
+                                            class="py-2 px-4 hover:text-red-700"
+                                            x-data=""
+                                            x-on:click.prevent="$dispatch('open-modal', 'confirm-game-deletion-{{ $game->id }}')">
+                                            <i class="fa-solid fa-trash-can fa-xl"
+                                                title="{{ __('delete') }}"></i>
                                         </button>
 
                                         {{-- <form action="{{ route('games.destroy', $game) }}" method="post" class="mb-0">
@@ -101,6 +104,12 @@
                                         </form> --}}
                                     </div>
                                 </td>
+
+                                <!-- Delete Game Confirmation Modal -->
+                                <x-confirm-modal name="confirm-game-deletion-{{ $game->id }}"
+                                    action="{{ route('games.destroy', $game) }}"
+                                    message="{{ __('game_delete') }}" />
+
                             @endauth
                         </tr>
 
@@ -132,14 +141,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        <!-- Delete Game Confirmation Modal -->
-        @isset($game)
-        <x-confirm-modal
-            name="confirm-game-deletion"
-            action="{{ route('games.destroy', $game) }}"
-            message="{{ __('game_delete') }}" />
-        @endisset
 
     </div>
 
