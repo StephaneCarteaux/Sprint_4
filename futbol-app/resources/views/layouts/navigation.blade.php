@@ -165,7 +165,7 @@
             </div>
 
             <!-- Languages -->
-            <div class="flex items-center ms-4">
+            <div class="hidden lg:flex items-center ms-4">
 
                 <a href="{{ route('locale.change', ['locale' => 'es_ES']) }}"
                     class="p-2 {{ app()->getLocale() == 'es_ES' ? 'pointer-events-none bg-gray-50/30 rounded' : '' }} ">
@@ -254,6 +254,23 @@
                 </div>
             </div>
         @endauth
+
+        <!-- Languages -->
+        <div class="py-2 border-t border-gray-200">
+            <div class="flex items-center ms-4">
+
+                <a href="{{ route('locale.change', ['locale' => 'es_ES']) }}"
+                    class=" {{ app()->getLocale() == 'es_ES' ? 'pointer-events-none bg-gray-50/30 rounded' : '' }} ">
+                    <x-flag-es-ES />
+                </a>
+
+                <a href="{{ route('locale.change', ['locale' => 'en_US']) }}"
+                    class="p-2 {{ app()->getLocale() == 'en_US' ? 'pointer-events-none bg-gray-50/30 rounded' : '' }} ">
+                    <x-flag-en-US />
+                </a>
+            </div>
+
+        </div>
 
     </div>
 </nav>
